@@ -53,5 +53,12 @@ namespace GerenciamentoPedidosComida.Models
                 }
             }
         }
+        public override string ToString()
+        {
+            return $"Restaurante ID: {Id}\n" +
+                $"Nome: {Nome}\n" +
+                $"Endereço: {Endereco}\n" +
+                $"Número de Telefone: {NumeroTelefone}";
+        }
     }
 }

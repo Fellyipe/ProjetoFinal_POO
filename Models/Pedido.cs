@@ -45,5 +45,15 @@ namespace GerenciamentoPedidosComida.Models
             get { return _restauranteId; } 
             set { _restauranteId = value; } 
         }
+        public override string ToString()
+        {
+            return $"Pedido ID: {Id}\n" +
+                $"Data do Pedido: {DataPedido}\n" +
+                $"Status: {Status}\n" +
+                $"Total: {Total}\n" +
+                $"ID do Cliente: {ClienteId}\n" +
+                $"ID do Restaurante: {RestauranteId}";
+        }
+
     }
 }

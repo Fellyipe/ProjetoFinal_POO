@@ -12,17 +12,55 @@ namespace GerenciamentoPedidosComida.UI
             _clienteRepository = clienteRepository;
         }
 
-        public void CreateCliente(Cliente cliente)
+        public void CreateCliente()
         {
-            // Lógica de negócio para criação de usuário
-            // ...
+            Console.WriteLine("Informe os dados do cliente:");
+
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Endereço: ");
+            string endereco = Console.ReadLine();
+
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
+            while(IsEmailAlreadyTaken(email))
+            {
+                Console.WriteLine("Email já utilizado, use outro");
+                Console.Write("Email: ");
+                email = Console.ReadLine();
+            }
+
+            Console.Write("Senha: ");
+            string senha = Console.ReadLine();
+
+            Console.Write("Número de Telefone: ");
+            string numeroTelefone = Console.ReadLine();
+
+
+            Cliente cliente = new Cliente
+            {
+                Nome = nome,
+                Endereco = endereco,
+                Email = email,
+                Senha = senha,
+                NumeroTelefone = numeroTelefone
+            };
 
             _clienteRepository.Create(cliente);
         }
 
-        public Cliente? GetClienteById(int clienteId)
+        public void GetClienteById(int clienteId)
         {
-            return _clienteRepository.GetById(clienteId);
+            Cliente? cliente = _clienteRepository.GetById(clienteId);
+            if (cliente != null)
+            {
+                Console.WriteLine(cliente);
+            }
+            else
+            {
+                Console.WriteLine("Não há nenhum cliente com esse Id");
+            }
         }
 
         public void UpdateCliente(Cliente cliente)
@@ -39,6 +77,21 @@ namespace GerenciamentoPedidosComida.UI
             // ...
 
             _clienteRepository.Delete(clienteId);
+        }
+
+        private bool IsEmailAlreadyTaken(string email)
+        {
+            
+            List<Cliente> lista = _clienteRepository.GetAll();
+            foreach (var item in lista)
+            {
+                if (item.Email == email)
+                {
+                    return true;
+                }
+            }
+            return false;
+            
         }
     }
 }

@@ -48,7 +48,7 @@ namespace GerenciamentoPedidosComida
                 Console.WriteLine("Erro ao conectar ao banco de dados: " + ex.Message);
             }
 
-            /*IRepository<Cliente> clienteRepository = new Repository<Cliente>();
+            IRepository<Cliente> clienteRepository = new Repository<Cliente>();
 
             // Criando uma instância do serviço de usuário
             ClienteUI clienteUI = new ClienteUI(clienteRepository);
@@ -62,8 +62,8 @@ namespace GerenciamentoPedidosComida
             };
 
             // Chamando o método para criar o usuário
-            clienteUI.CreateCliente(novoCliente);
-            */
+            clienteUI.CreateCliente();
+            
         }
     }
 }

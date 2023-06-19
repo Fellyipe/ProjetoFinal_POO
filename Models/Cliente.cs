@@ -83,5 +83,14 @@ namespace GerenciamentoPedidosComida.Models
                 }
             }
         }
+        public override string ToString()
+        {
+            return $"Cliente ID: {Id}\n" +
+                $"Nome: {Nome}\n" +
+                $"Endereço: {Endereco}\n" +
+                $"Email: {Email}\n" +
+                $"Número de Telefone: {NumeroTelefone}";
+        }
+
     }
 }
