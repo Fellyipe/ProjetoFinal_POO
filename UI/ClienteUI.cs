@@ -93,5 +93,24 @@ namespace GerenciamentoPedidosComida.UI
             return false;
             
         }
+
+        public bool Login(string email, string senha)
+        {
+            List<Cliente> lista = _clienteRepository.GetAll();
+            foreach (var item in lista)
+            {
+                if (item.Email == email)
+                {
+                    if (item.Senha == senha)
+                    {
+                        Console.WriteLine("Login realizado com sucesso!");
+                        return true;
+                    }    
+                    break;
+                }
+            }
+            Console.WriteLine("Usuário ou senha inválidos.");
+            return false;
+        }
     }
 }

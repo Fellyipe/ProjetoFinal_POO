@@ -62,7 +62,9 @@ namespace GerenciamentoPedidosComida
             };
 
             // Chamando o método para criar o usuário
-            clienteUI.CreateCliente();
+            var email = Console.ReadLine();
+            var senha = Console.ReadLine();
+            var teste = clienteUI.Login(email, senha);
             
         }
     }
