@@ -5,7 +5,7 @@ namespace GerenciamentoPedidosComida.Models
     public class Avaliacao
     {
         private int _id;
-        private string _comentario;
+        private string? _comentario;
         private int _classificacao;
         private int _clienteId;
         private int _restauranteId;
@@ -14,7 +14,7 @@ namespace GerenciamentoPedidosComida.Models
             get { return _id; } 
             set { _id = value; } 
         }
-        public string Comentario {
+        public string? Comentario {
             get { return _comentario; } 
             set { _comentario = value; } 
         }

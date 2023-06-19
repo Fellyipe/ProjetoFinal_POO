@@ -7,7 +7,7 @@ namespace GerenciamentoPedidosComida.Models
     {
         private int _id;
         private DateTime _dataPedido;
-        private string _status;
+        private string _status = "";
         private decimal _total;
         private int _clienteId;
         private int _restauranteId;
@@ -21,7 +21,17 @@ namespace GerenciamentoPedidosComida.Models
         }
         public string Status {
             get { return _status; } 
-            set { _status = value; } 
+            set
+            {
+                if (value != null)
+                {
+                    _status = value;
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(Status), "O campo Status não pode ser nulo.");
+                }
+            }
         }
         public decimal Total {
             get { return _total; } 

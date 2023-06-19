@@ -5,7 +5,7 @@ namespace GerenciamentoPedidosComida.Interfaces
             void Create(T entidade);
             void Update(T entidade);
             void Delete(int id);
-            T GetById(int id);
+            T? GetById(int id);
             List<T> GetAll();
         }
 }

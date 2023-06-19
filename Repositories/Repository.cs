@@ -35,7 +35,7 @@ namespace GerenciamentoPedidosComida.Repositories
 
         public void Delete(int id)
         {
-            T entidade = GetById(id);
+            T? entidade = GetById(id);
             if (entidade != null)
             {
                 _dbSet.Remove(entidade);
@@ -43,7 +43,7 @@ namespace GerenciamentoPedidosComida.Repositories
             }
         }
 
-        public T GetById(int id)
+        public T? GetById(int id)
         {
             return _dbSet.Find(id);
         }

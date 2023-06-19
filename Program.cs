@@ -48,22 +48,22 @@ namespace GerenciamentoPedidosComida
                 Console.WriteLine("Erro ao conectar ao banco de dados: " + ex.Message);
             }
 
-            IRepository<Cliente> clienteRepository = new Repository<Cliente>();
+            /*IRepository<Cliente> clienteRepository = new Repository<Cliente>();
 
             // Criando uma instância do serviço de usuário
             ClienteUI clienteUI = new ClienteUI(clienteRepository);
             Cliente novoCliente = new Cliente
             {
-                Nome = "André",
-                Endereco = "Rua das Pitangueiras, 512, Centro, Guarapuava",
-                Email = "andre@gmail.com",
-                Senha = "1234",
-                NumeroTelefone = "(48)99545-1234"
+                Nome = "Jorge",
+                Endereco = "Avenida Brasília, 123, Vila A, Foz do Iguaçu",
+                Email = "jorge11@mail.com",
+                Senha = "4321",
+                NumeroTelefone = "(48)97894-1212"
             };
 
             // Chamando o método para criar o usuário
             clienteUI.CreateCliente(novoCliente);
-
+            */
         }
     }
 }

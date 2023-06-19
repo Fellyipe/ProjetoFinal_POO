@@ -20,7 +20,7 @@ namespace GerenciamentoPedidosComida.UI
             _clienteRepository.Create(cliente);
         }
 
-        public Cliente GetClienteById(int clienteId)
+        public Cliente? GetClienteById(int clienteId)
         {
             return _clienteRepository.GetById(clienteId);
         }

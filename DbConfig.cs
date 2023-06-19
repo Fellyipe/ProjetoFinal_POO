@@ -5,12 +5,12 @@ namespace GerenciamentoPedidosComida.Migrations
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Avaliacao> Avaliacaos { get; set; }
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<ItemPedido> ItemPedidos { get; set; }
-        public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<Prato> Pratos { get; set; }
-        public DbSet<Restaurante> Restaurantes { get; set; }
+        public DbSet<Avaliacao>? Avaliacaos { get; set; }
+        public DbSet<Cliente>? Clientes { get; set; }
+        public DbSet<ItemPedido>? ItemPedidos { get; set; }
+        public DbSet<Pedido>? Pedidos { get; set; }
+        public DbSet<Prato>? Pratos { get; set; }
+        public DbSet<Restaurante>? Restaurantes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,6 +22,8 @@ namespace GerenciamentoPedidosComida.Migrations
                 modelBuilder.Entity<Pedido>().ToTable("Pedido");
                 modelBuilder.Entity<Prato>().ToTable("Prato");
                 modelBuilder.Entity<Restaurante>().ToTable("Restaurante");
+                
+                modelBuilder.Entity<Avaliacao>().Property(c => c.Comentario).IsRequired(false); // Permite valores nulos
             }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
