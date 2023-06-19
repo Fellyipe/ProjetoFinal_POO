@@ -1,4 +1,7 @@
-- Tabela Cliente
+CREATE DATABASE gerenciamentopedidoscomida;
+
+USE GerenciamentoPedidosComida;
+
 CREATE TABLE Cliente (
 Id INT NOT NULL AUTO_INCREMENT,
 Nome VARCHAR(100) NOT NULL,
@@ -9,7 +12,6 @@ NumeroTelefone VARCHAR(20) NOT NULL UNIQUE,
 PRIMARY KEY(Id)
 );
 
-- Tabela Restaurante
 CREATE TABLE Restaurante (
 Id INT NOT NULL AUTO_INCREMENT,
 Nome VARCHAR(100) NOT NULL,
@@ -18,7 +20,6 @@ NumeroTelefone VARCHAR(20) NOT NULL UNIQUE,
 PRIMARY KEY(Id)
 );
 
-- Tabela Pedido
 CREATE TABLE Pedido (
 Id INT PRIMARY KEY AUTO_INCREMENT,
 DataPedido DATE NOT NULL,
@@ -28,7 +29,6 @@ ClienteId INT NOT NULL REFERENCES Cliente(Id),
 RestauranteId INT NOT NULL REFERENCES Restaurante(Id)
 );
 
-- Tabela ItemPedido
 CREATE TABLE ItemPedido (
 PedidoId INT NOT NULL REFERENCES Pedido(Id),
 PratoId INT NOT NULL REFERENCES Prato(Id),
@@ -38,7 +38,6 @@ Total DECIMAL(10, 2) NOT NULL,
 PRIMARY KEY (PedidoId, PratoId)
 );
 
-- Tabela Prato
 CREATE TABLE Prato (
 Id INT NOT NULL AUTO_INCREMENT,
 NomeItem VARCHAR(100) NOT NULL,
@@ -48,7 +47,6 @@ RestauranteId INT NOT NULL REFERENCES Restaurante(Id),
 PRIMARY KEY (Id)
 );
 
-- Tabela Avaliacao
 CREATE TABLE Avaliacao (
 Id INT NOT NULL AUTO_INCREMENT,
 Comentario VARCHAR(255),

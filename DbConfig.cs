@@ -26,7 +26,7 @@ namespace GerenciamentoPedidosComida.Migrations
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("Server=localhost; Database=GerenciamentoPedidosComida; User id=root; Password=0406");
+            optionsBuilder.UseMySQL("Server=localhost; Database=gerenciamentopedidoscomida; User id=root; Password=");
         }
     }
 }

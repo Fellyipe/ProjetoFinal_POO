@@ -12,15 +12,15 @@ namespace GerenciamentoPedidosComida.Repositories
 
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _dbContext;
-        private readonly DbSet<T> _dbSet;
-
-        public Repository(ApplicationDbContext dbContext)
+        //private readonly ApplicationDbContext _dbContext;
+        private ApplicationDbContext _dbContext = new ApplicationDbContext();
+        private DbSet<T> _dbSet;
+        
+        public Repository(/*ApplicationDbContext dbContext*/)
         {
-            _dbContext = dbContext;
+            //_dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
         }
-
         public void Create(T entidade)
         {
             _dbSet.Add(entidade);
