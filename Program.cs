@@ -13,6 +13,7 @@ using GerenciamentoPedidosComida.Repositories;
 using GerenciamentoPedidosComida.UI;
 using GerenciamentoPedidosComida.Models;
 using GerenciamentoPedidosComida.Interfaces;
+using GerenciamentoPedidosComida.Services;
 
 namespace GerenciamentoPedidosComida
 {
@@ -51,7 +52,7 @@ namespace GerenciamentoPedidosComida
             IRepository<Cliente> clienteRepository = new Repository<Cliente>();
 
             // Criando uma instância do serviço de usuário
-            ClienteUI clienteUI = new ClienteUI(clienteRepository);
+            ClienteUI clienteUI = new ClienteUI();
             Cliente novoCliente = new Cliente
             {
                 Nome = "Jorge",
@@ -64,8 +65,10 @@ namespace GerenciamentoPedidosComida
             // Chamando o método para criar o usuário
             var email = Console.ReadLine();
             var senha = Console.ReadLine();
-            var teste = clienteUI.Login(email, senha);
-            
+            Menu menu = new Menu();
+            //menu.RealizarLogin();
+            var _uteis = new Uteis();
+            menu.RealizarLogin();
         }
     }
 }

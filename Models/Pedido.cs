@@ -35,7 +35,17 @@ namespace GerenciamentoPedidosComida.Models
         }
         public decimal Total {
             get { return _total; } 
-            set { _total = value; } 
+            set
+            {
+                if (value >= 0)
+                {
+                    _total = value;
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(Total), "O campo Total não pode ser negativo.");
+                }
+            }  
         }
         public int ClienteId {
             get { return _clienteId; } 

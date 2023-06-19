@@ -52,5 +52,11 @@ namespace GerenciamentoPedidosComida.Repositories
         {
             return _dbSet.ToList();
         }
+
+        public bool VerifyLogin(string email, string senha)
+        {
+            var usuario = _dbContext.Clientes.FirstOrDefault(u => u.Email == email && u.Senha == senha);
+            return usuario != null;
+        }
     }
 }

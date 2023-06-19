@@ -1,5 +1,6 @@
 using GerenciamentoPedidosComida.Interfaces;
 using GerenciamentoPedidosComida.Models;
+using GerenciamentoPedidosComida.Repositories;
 
 namespace GerenciamentoPedidosComida.UI
 {
@@ -7,9 +8,10 @@ namespace GerenciamentoPedidosComida.UI
     {
         private IRepository<Cliente> _clienteRepository;
 
-        public ClienteUI(IRepository<Cliente> clienteRepository)
+        public ClienteUI()
         {
-            _clienteRepository = clienteRepository;
+            _clienteRepository = new Repository<Cliente>();
+            
         }
 
         public void CreateCliente()
@@ -96,6 +98,7 @@ namespace GerenciamentoPedidosComida.UI
 
         public bool Login(string email, string senha)
         {
+            
             List<Cliente> lista = _clienteRepository.GetAll();
             foreach (var item in lista)
             {

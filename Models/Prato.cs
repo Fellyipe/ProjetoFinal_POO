@@ -42,7 +42,17 @@ namespace GerenciamentoPedidosComida.Models
         }
         public decimal Preco {
             get { return _preco; } 
-            set { _preco = value; } 
+            set
+            {
+                if (value >= 0)
+                {
+                    _preco = value;
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(Preco), "O campo Preco não pode ser negativo.");
+                }
+            } 
         }
         public int RestauranteId {
             get { return _restauranteId; } 
