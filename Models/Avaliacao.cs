@@ -4,11 +4,35 @@ namespace GerenciamentoPedidosComida.Models
 {
     public class Avaliacao
     {
-        public int Id { get; set; }
-        public string Comentario { get; set; }
-        public int Classificacao { get; set; }
-        public int ClienteId { get; set; }
-        public int RestauranteId { get; set; }
-        public int PedidoId { get; set; }
+        private int _id;
+        private string _comentario;
+        private int _classificacao;
+        private int _clienteId;
+        private int _restauranteId;
+        private int _pedidoId;
+        public int Id {
+            get { return _id; } 
+            set { _id = value; } 
+        }
+        public string Comentario {
+            get { return _comentario; } 
+            set { _comentario = value; } 
+        }
+        public int Classificacao {
+            get { return _classificacao; } 
+            set { _classificacao = value; } 
+        }
+        public int ClienteId {
+            get { return _clienteId; } 
+            set { _clienteId = value; } 
+        }
+        public int RestauranteId {
+            get { return _restauranteId; } 
+            set { _restauranteId = value; } 
+        }
+        public int PedidoId {
+            get { return _pedidoId; } 
+            set { _pedidoId = value; } 
+        }
     }
 }
