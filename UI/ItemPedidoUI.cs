@@ -13,23 +13,23 @@ namespace GerenciamentoPedidosComida.UI
             _itemPedidoRepository = new Repository<ItemPedido>();
         }
 
-        public void CreateItemPedido()
+        public void CreateItemPedido(ItemPedido itemPedido)
         {
-            Console.WriteLine("Informe os dados do itemPedido:");
-            /*var itemPedido;
-            _itemPedidoRepository.Create(itemPedido);*/
+            _itemPedidoRepository.Create(itemPedido);
         }
 
-        public void GetItemPedidoById(int itemPedidoId)
+        public ItemPedido GetItemPedidoById(int itemPedidoId)
         {
             ItemPedido? itemPedido = _itemPedidoRepository.GetById(itemPedidoId);
             if (itemPedido != null)
             {
                 Console.WriteLine(itemPedido);
+                return itemPedido;
             }
             else
             {
                 Console.WriteLine("Não há nenhum itemPedido com esse Id");
+                return null;
             }
         }
 

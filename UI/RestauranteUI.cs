@@ -15,9 +15,26 @@ namespace GerenciamentoPedidosComida.UI
 
         public void CreateRestaurante()
         {
-            Console.WriteLine("Informe os dados do restaurante:");
-            /*var restaurante;
-            _restauranteRepository.Create(restaurante);*/
+            Console.WriteLine("Informe os dados:");
+
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Endereço: ");
+            string endereco = Console.ReadLine();
+
+            Console.Write("Número de Telefone: ");
+            string numeroTelefone = Console.ReadLine();
+
+
+            Restaurante restaurante = new Restaurante
+            {
+                Nome = nome,
+                Endereco = endereco,
+                NumeroTelefone = numeroTelefone
+            };
+
+            _restauranteRepository.Create(restaurante);
         }
 
         public void GetRestauranteById(int restauranteId)

@@ -35,10 +35,12 @@ namespace GerenciamentoPedidosComida.Services
             return 0; // Retorna 0 se nenhum usuário for encontrado na tabela
         }
 
-        public Task<List<Prato>> GetAllPratosByRestauranteId(int RestauranteId)
+        public Task<List<Prato>> GetAllPratosByRestauranteId(int restauranteId)
         {
-            return _dbContext.Pratos.Where(p => p.RestauranteId == RestauranteId).ToListAsync();
+            return _dbContext.Pratos.Where(p => p.RestauranteId == restauranteId).ToListAsync();
         }
+
+        
         
         /*public List<Pedido> GetPedidosByStatus(string status)
         {

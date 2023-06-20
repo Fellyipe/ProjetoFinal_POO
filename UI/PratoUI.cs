@@ -15,21 +15,43 @@ namespace GerenciamentoPedidosComida.UI
 
         public void CreatePrato()
         {
-            Console.WriteLine("Informe os dados do prato:");
-            /*var prato;
-            _pratoRepository.Create(prato);*/
+            Console.WriteLine("Informe os dados:");
+
+            Console.Write("Nome do prato: ");
+            string nomeItem = Console.ReadLine();
+
+            Console.Write("Descrição: ");
+            string descricao = Console.ReadLine();
+
+            Console.Write("Preço: ");
+            decimal preco = Convert.ToDecimal(Console.ReadLine());
+
+            Console.Write("Id do restaurante: ");
+            int restauranteId = Convert.ToInt32(Console.ReadLine());
+
+            Prato prato = new Prato
+            {
+                NomeItem = nomeItem,
+                Descricao = descricao,
+                Preco = preco,
+                RestauranteId = restauranteId
+            };
+
+            _pratoRepository.Create(prato);
         }
 
-        public void GetPratoById(int pratoId)
+        public Prato GetPratoById(int pratoId)
         {
             Prato? prato = _pratoRepository.GetById(pratoId);
             if (prato != null)
             {
                 Console.WriteLine(prato);
+                return prato;
             }
             else
             {
                 Console.WriteLine("Não há nenhum prato com esse Id");
+                return null;
             }
         }
 

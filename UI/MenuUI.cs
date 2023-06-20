@@ -1,4 +1,5 @@
 using GerenciamentoPedidosComida.Services;
+using GerenciamentoPedidosComida.Models;
 //  Terminar a UI do menu
 //  Terminar a UI das classes
 //  Fazer a classe Utils, que vai fazer uso da ApplicationDbContext
@@ -18,6 +19,7 @@ namespace GerenciamentoPedidosComida.UI
         private AvaliacaoUI _avaliacaoUI;
         private ClienteUI _clienteUI;
         private ItemPedidoUI _itemPedidoUI;
+        private PratoUI _pratoUI;
         private Uteis _uteis;
 
         public Menu()
@@ -27,6 +29,7 @@ namespace GerenciamentoPedidosComida.UI
             _avaliacaoUI = new AvaliacaoUI();
             _clienteUI = new ClienteUI();
             _itemPedidoUI = new ItemPedidoUI();
+            _pratoUI = new PratoUI();
             _uteis = new Uteis();
         }
 
@@ -205,7 +208,7 @@ namespace GerenciamentoPedidosComida.UI
             Console.WriteLine();
         }
 
-        private void RealizarNovoPedido()
+        private async void RealizarNovoPedido()
         {
             _pedidoUI.CreatePedido();
             // Console.WriteLine("Id do pedido: " + _uteis.GetLastPedidoIdAsync());
@@ -213,7 +216,45 @@ namespace GerenciamentoPedidosComida.UI
             // Implementar lógica para realizar um novo pedido
             int pedidoId = Convert.ToInt32(_uteis.GetLastPedidoIdAsync());
             int restauranteId = _pedidoUI.GetRestauranteIdByPedidoId(pedidoId);
-            
+            var listaPratosTask = _uteis.GetAllPratosByRestauranteId(restauranteId);
+            var listaPratos = await listaPratosTask;
+            List<int> listaPratosId = new List<int>();
+            foreach (var item in listaPratos)
+            {
+                Console.WriteLine(item);
+                listaPratosId.Add(item.Id);
+            }
+            if (listaPratos == null) 
+            {
+                Console.WriteLine("Não há nenhum prato no cardápio deste restaurante :(");
+                Console.WriteLine("Deletando pedido...");
+                _pedidoUI.DeletePedido(pedidoId);
+            }
+            Console.WriteLine("Adicione os pratos disponíveis (digite o Id para adicionar ao carrinho ou 0 para encerrar o pedido):");
+            int pratoId;
+            do
+            {
+                Console.Write("Digite o Id do prato: ");
+                pratoId = Convert.ToInt32(Console.ReadLine());
+                if(!listaPratosId.Contains(pratoId))
+                {
+                    Console.WriteLine("Por favor, adicione apenas os pratos disponíveis no cardápio do restaurante");
+                    continue;
+                }
+                decimal precoUnitario = _pratoUI.GetPratoById(pratoId).Preco;
+                Console.Write("Digite a quantidade: ");
+                int quantidade = Convert.ToInt32(Console.ReadLine());
+                decimal total = precoUnitario * quantidade;
+                ItemPedido itemPedido = new ItemPedido
+                {
+                    PedidoId = pedidoId,
+                    PratoId = pratoId,
+                    Quantidade = quantidade,
+                    PrecoUnitario = precoUnitario,
+                    Total = total
+                };
+                _itemPedidoUI.CreateItemPedido(itemPedido);
+            } while (pratoId != 0);
         }
 
         private async void ListarPratosPorRestaurante()
