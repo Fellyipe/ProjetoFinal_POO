@@ -63,12 +63,13 @@ namespace GerenciamentoPedidosComida
             };
 
             // Chamando o método para criar o usuário
-            var email = Console.ReadLine();
+            /*var email = Console.ReadLine();
             var senha = Console.ReadLine();
-            Menu menu = new Menu();
             //menu.RealizarLogin();
             var _uteis = new Uteis();
-            menu.RealizarLogin();
+            Menu menu = new Menu();
+            menu.RealizarLogin();*/
+
         }
     }
 }

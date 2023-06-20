@@ -216,13 +216,18 @@ namespace GerenciamentoPedidosComida.UI
             
         }
 
-        private void ListarPratosPorRestaurante()
+        private async void ListarPratosPorRestaurante()
         {
             // Implementar lógica para listar pratos por restaurante
             _restauranteUI.ListAllRestaurantes();
             Console.WriteLine("Digite o Id para abrir o cardápio de um restaurante");
-            int idRestaurante = Convert.ToInt32(Console.ReadLine());
-            foreach(item in _uteis.GetAllPratosByRestauranteId)
+            int restauranteId = Convert.ToInt32(Console.ReadLine());
+            var listaPratosTask = _uteis.GetAllPratosByRestauranteId(restauranteId);
+            var listaPratos = await listaPratosTask;
+            foreach(var item in listaPratos)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         private void ConfirmarRecebimentoPedido()
