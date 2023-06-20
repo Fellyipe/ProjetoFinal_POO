@@ -16,28 +16,33 @@ namespace GerenciamentoPedidosComida.Services
             // _dbContext = dbContext;
             // _dbSet = _dbContext.Set<T>();
         }
-        public bool Login(string email, string senha)
+        public Cliente Login(string email, string senha)
         {    
-            var usuario = _dbContext.Clientes.FirstOrDefault(u => u.Email == email && u.Senha == senha);
+            var cliente = _dbContext.Clientes.FirstOrDefault(u => u.Email == email && u.Senha == senha);
 
-            return usuario != null;
+            return cliente;
         }
 
-        public async Task<int> GetLastPedidoIdAsync()
+        public Pedido GetLastPedido()
         {
-            var lastUser = await _dbContext.Pedidos.OrderByDescending(u => u.Id).FirstOrDefaultAsync();
+            var lastUser = _dbContext.Pedidos.OrderByDescending(u => u.Id).FirstOrDefault();
 
             if (lastUser != null)
             {
-                return lastUser.Id;
+                return lastUser;
             }
 
-            return 0; // Retorna 0 se nenhum usuário for encontrado na tabela
+            return null; // Retorna 0 se nenhum usuário for encontrado na tabela
         }
 
-        public Task<List<Prato>> GetAllPratosByRestauranteId(int restauranteId)
+        public List<Prato> GetAllPratosByRestauranteId(int restauranteId)
         {
-            return _dbContext.Pratos.Where(p => p.RestauranteId == restauranteId).ToListAsync();
+            return _dbContext.Pratos.Where(p => p.RestauranteId == restauranteId).ToList();
+        }
+
+        public List<Pedido> GetAllPedidosEntregues()
+        {
+            return _dbContext.Pedidos.Where(p => p.Status == "Entregue").ToList();
         }
 
         

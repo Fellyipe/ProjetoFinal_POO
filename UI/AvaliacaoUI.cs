@@ -13,23 +13,35 @@ namespace GerenciamentoPedidosComida.UI
             _avaliacaoRepository = new Repository<Avaliacao>();
         }
 
-        public void CreateAvaliacao()
+        public void CreateAvaliacao(Pedido pedido)
         {
-            Console.WriteLine("Informe os dados do avaliacao:");
-            /*var avaliacao;
-            _avaliacaoRepository.Create(avaliacao);*/
+            Console.WriteLine("Avalie o seu pedido (1 a 5):");
+            int classificacao = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Faça um comentário (opcional)");
+            string comentario = Console.ReadLine(); 
+            //while ()
+            Avaliacao avaliacao = new Avaliacao
+            {
+                Comentario = comentario,
+                Classificacao = classificacao,
+                ClienteId = pedido.ClienteId,
+                RestauranteId = pedido.RestauranteId,
+                PedidoId = pedido.Id
+            };
+            _avaliacaoRepository.Create(avaliacao);
         }
 
-        public void GetAvaliacaoById(int avaliacaoId)
+        public Avaliacao GetAvaliacaoById(int avaliacaoId)
         {
             Avaliacao? avaliacao = _avaliacaoRepository.GetById(avaliacaoId);
             if (avaliacao != null)
             {
-                Console.WriteLine(avaliacao);
+                return avaliacao;
             }
             else
             {
                 Console.WriteLine("Não há nenhum avaliacao com esse Id");
+                return null;
             }
         }
 
@@ -47,6 +59,15 @@ namespace GerenciamentoPedidosComida.UI
             // ...
 
             _avaliacaoRepository.Delete(avaliacaoId);
+        }
+
+        public void ListAllAvaliacaos()
+        {
+            IEnumerable<Avaliacao> listaAvaliacaos = _avaliacaoRepository.GetAll();
+            foreach (var item in listaAvaliacaos)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

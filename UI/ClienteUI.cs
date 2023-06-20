@@ -94,8 +94,16 @@ namespace GerenciamentoPedidosComida.UI
                     return true;
                 }
             }
-            return false;
-            
+            return false;   
+        }
+
+        public void ListAllClientes()
+        {
+            IEnumerable<Cliente> listaClientes = _clienteRepository.GetAll();
+            foreach (var item in listaClientes)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

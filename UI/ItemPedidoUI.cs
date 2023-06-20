@@ -48,5 +48,14 @@ namespace GerenciamentoPedidosComida.UI
 
             _itemPedidoRepository.Delete(itemPedidoId);
         }
+
+        public void ListAllItemPedidos()
+        {
+            IEnumerable<ItemPedido> listaItemPedidos = _itemPedidoRepository.GetAll();
+            foreach (var item in listaItemPedidos)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }

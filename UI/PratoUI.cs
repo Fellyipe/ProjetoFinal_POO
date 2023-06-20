@@ -45,7 +45,6 @@ namespace GerenciamentoPedidosComida.UI
             Prato? prato = _pratoRepository.GetById(pratoId);
             if (prato != null)
             {
-                Console.WriteLine(prato);
                 return prato;
             }
             else

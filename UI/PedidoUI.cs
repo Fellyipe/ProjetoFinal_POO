@@ -13,25 +13,16 @@ namespace GerenciamentoPedidosComida.UI
             _pedidoRepository = new Repository<Pedido>();
         }
 
-        public void CreatePedido()
+        public void CreatePedido(int clienteId, int restauranteId)
         {
             IRepository<ItemPedido> _itemPedidoRepository = new Repository<ItemPedido>();
             /*var pedido;
             _pedidoRepository.Create(pedido);*/
-            // Obter os detalhes do pedido do usuário
-            Console.Write("Digite a data do pedido (dd/mm/aaaa): ");
-            DateTime dataPedido = DateTime.Parse(Console.ReadLine());
-            
-            Console.Write("Digite o ID do cliente: ");
-            int clienteId = int.Parse(Console.ReadLine());
-            
-            Console.Write("Digite o ID do restaurante: ");
-            int restauranteId = int.Parse(Console.ReadLine());
-        
+            // Obter os detalhes do pedido do usuário            
             // Criar o objeto Pedido
             Pedido novoPedido = new Pedido
             {
-                DataPedido = dataPedido,
+                DataPedido = DateTime.Now,
                 ClienteId = clienteId,
                 RestauranteId = restauranteId,
                 Status = "Em andamento",
@@ -76,6 +67,15 @@ namespace GerenciamentoPedidosComida.UI
         public int GetRestauranteIdByPedidoId(int pedidoId)
         {
             return _pedidoRepository.GetById(pedidoId).RestauranteId;
+        }
+
+        public void ListAllPedidos()
+        {
+            IEnumerable<Pedido> listaPedidos = _pedidoRepository.GetAll();
+            foreach (var item in listaPedidos)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
