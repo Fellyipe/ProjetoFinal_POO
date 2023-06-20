@@ -23,12 +23,12 @@ namespace GerenciamentoPedidosComida.UI
             ItemPedido? itemPedido = _itemPedidoRepository.GetById(itemPedidoId);
             if (itemPedido != null)
             {
-                Console.WriteLine(itemPedido);
+                //Console.WriteLine(itemPedido);
                 return itemPedido;
             }
             else
             {
-                Console.WriteLine("Não há nenhum itemPedido com esse Id");
+                //Console.WriteLine("Não há nenhum itemPedido com esse Id");
                 return null;
             }
         }

@@ -52,16 +52,18 @@ namespace GerenciamentoPedidosComida.UI
             _clienteRepository.Create(cliente);
         }
 
-        public void GetClienteById(int clienteId)
+        public Cliente GetClienteById(int clienteId)
         {
             Cliente? cliente = _clienteRepository.GetById(clienteId);
             if (cliente != null)
             {
-                Console.WriteLine(cliente);
+                //Console.WriteLine(cliente);
+                return cliente;
             }
             else
             {
-                Console.WriteLine("Não há nenhum cliente com esse Id");
+                //Console.WriteLine("Não há nenhum cliente com esse Id");
+                return null;
             }
         }
 

@@ -37,23 +37,38 @@ namespace GerenciamentoPedidosComida.UI
             _restauranteRepository.Create(restaurante);
         }
 
-        public void GetRestauranteById(int restauranteId)
+        public Restaurante GetRestauranteById(int restauranteId)
         {
             Restaurante? restaurante = _restauranteRepository.GetById(restauranteId);
             if (restaurante != null)
             {
-                Console.WriteLine(restaurante);
+                //Console.WriteLine(restaurante);
+                return restaurante;
             }
             else
             {
-                Console.WriteLine("Não há nenhum restaurante com esse Id");
+                //Console.WriteLine("Não há nenhum restaurante com esse Id");
+                return null;
             }
         }
 
         public void UpdateRestaurante(Restaurante restaurante)
         {
-            // Lógica de negócio para atualização de usuário
-            // ...
+            Console.WriteLine("Informe os dados:");
+
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Endereço: ");
+            string endereco = Console.ReadLine();
+
+            Console.Write("Número de Telefone: ");
+            string numeroTelefone = Console.ReadLine();
+
+
+            restaurante.Nome = nome;
+            restaurante.Endereco = endereco;
+            restaurante.NumeroTelefone = numeroTelefone;
 
             _restauranteRepository.Update(restaurante);
         }

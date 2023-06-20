@@ -40,7 +40,7 @@ namespace GerenciamentoPedidosComida.UI
                 Console.WriteLine("=== MENU INICIAL ===");
                 Console.WriteLine("1. Realizar login");
                 Console.WriteLine("2. Cadastrar novo usuário");
-                Console.WriteLine("3. Sair");
+                Console.WriteLine("0. Sair");
 
                 Console.Write("Digite a opção desejada: ");
                 string opcao = Console.ReadLine();
@@ -53,7 +53,7 @@ namespace GerenciamentoPedidosComida.UI
                     case "2":
                         _clienteUI.CreateCliente();
                         break;
-                    case "3":
+                    case "0":
                         Console.WriteLine("Saindo do programa...");
                         return;
                     default:
@@ -72,7 +72,7 @@ namespace GerenciamentoPedidosComida.UI
                 Console.WriteLine("2. Listar pratos por restaurante");
                 Console.WriteLine("3. Confirmar recebimento do pedido");
                 Console.WriteLine("4. Listar pedidos realizados");
-                Console.WriteLine("5. Sair");
+                Console.WriteLine("0. Sair");
 
                 Console.Write("Digite a opção desejada: ");
                 string opcao = Console.ReadLine();
@@ -91,7 +91,7 @@ namespace GerenciamentoPedidosComida.UI
                     case "4":
                         ListarPedidosRealizados();
                         break;
-                    case "5":
+                    case "0":
                         Console.WriteLine("Saindo do programa...");
                         return;
                     default:
@@ -112,7 +112,7 @@ namespace GerenciamentoPedidosComida.UI
                 Console.WriteLine("4. Gerenciar Pedidos");
                 Console.WriteLine("5. Gerenciar Pratos");
                 Console.WriteLine("6. Gerenciar Restaurantes");
-                Console.WriteLine("7. Sair");
+                Console.WriteLine("0. Sair");
 
                 Console.Write("Digite a opção desejada: ");
                 string opcao = Console.ReadLine();
@@ -137,7 +137,7 @@ namespace GerenciamentoPedidosComida.UI
                     case "6":
                         GerenciarRestaurantes();
                         break;
-                    case "7":
+                    case "0":
                         Console.WriteLine("Saindo do menu administrador...");
                         return;
                     default:
@@ -308,7 +308,50 @@ namespace GerenciamentoPedidosComida.UI
 
         private void GerenciarRestaurantes()
         {
-            // Implementar lógica para gerenciar restaurantes (CRUD de restaurantes)
+            while (true)
+            {
+                Console.WriteLine("=== GERENCIAR RESTAURANTES ===");
+                Console.WriteLine("1. Criar Restaurante");
+                Console.WriteLine("2. Ler Restaurante");
+                Console.WriteLine("3. Atualizar Restaurante");
+                Console.WriteLine("4. Excluir Restaurante");
+                Console.WriteLine("5. Listar todos os Restaurantes");
+                Console.WriteLine("0. Sair");
+
+                Console.Write("Digite a opção desejada: ");
+                string opcao = Console.ReadLine();
+
+                switch (opcao)
+                {
+                    case "1":
+                        _restauranteUI.CreateRestaurante();
+                        break;
+                    case "2":
+                        Console.Write("Digite o Id do restaurante: ");
+                        int restauranteId = Convert.ToInt32(Console.ReadLine());
+                        _restauranteUI.GetRestauranteById(restauranteId);
+                        break;
+                    case "3":
+                        Console.Write("Digite o Id do restaurante que quer atualizar: ");
+                        Restaurante restaurante = _restauranteUI.GetRestauranteById(Convert.ToInt32(Console.ReadLine()));
+                        _restauranteUI.UpdateRestaurante(restaurante);
+                        break;
+                    case "4":
+                        Console.Write("Digite o Id do restaurante que quer excluir: ");
+                        int id = Convert.ToInt32(Console.ReadLine());
+                        _restauranteUI.DeleteRestaurante(id);
+                        break;
+                    case "5":
+                        _restauranteUI.ListAllRestaurantes();
+                        break;
+                    case "0":
+                        Console.WriteLine("Saindo do menu Gerenciar Restaurantes...");
+                        return;
+                    default:
+                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        break;
+                }
+            }
         }
     }
 }

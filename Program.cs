@@ -67,8 +67,9 @@ namespace GerenciamentoPedidosComida
             var senha = Console.ReadLine();
             //menu.RealizarLogin();
             var _uteis = new Uteis();
-            Menu menu = new Menu();
             menu.RealizarLogin();*/
+            Menu menu = new Menu();
+            menu.MenuInicial();
 
         }
     }

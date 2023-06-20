@@ -42,16 +42,18 @@ namespace GerenciamentoPedidosComida.UI
             _pedidoRepository.Create(novoPedido);
         }
 
-        public void GetPedidoById(int pedidoId)
+        public Pedido GetPedidoById(int pedidoId)
         {
             Pedido? pedido = _pedidoRepository.GetById(pedidoId);
             if (pedido != null)
             {
-                Console.WriteLine(pedido);
+                // Console.WriteLine(pedido);
+                return pedido;
             }
             else
             {
-                Console.WriteLine("Não há nenhum pedido com esse Id");
+                // Console.WriteLine("Não há nenhum pedido com esse Id");
+                return null;
             }
         }
 
