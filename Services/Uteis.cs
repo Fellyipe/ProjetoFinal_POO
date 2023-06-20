@@ -18,29 +18,26 @@ namespace GerenciamentoPedidosComida.Services
         }
         public bool Login(string email, string senha)
         {    
-            //var usuario = _dbContext.Clientes.FirstOrDefault(u => u.Email == email && u.Senha == senha);
-            //var usuarios = _dbContext.Clientes.Find(1);
             var usuario = _dbContext.Clientes.FirstOrDefault(u => u.Email == email && u.Senha == senha);
 
             return usuario != null;
-            //return 0;
-            /*
-            List<Cliente> lista = _clienteRepository.GetAll();
-            foreach (var item in lista)
+        }
+
+        public async Task<int> GetLastPedidoIdAsync()
+        {
+            var lastUser = await _dbContext.Pedidos.OrderByDescending(u => u.Id).FirstOrDefaultAsync();
+
+            if (lastUser != null)
             {
-                if (item.Email == email)
-                {
-                    if (item.Senha == senha)
-                    {
-                        Console.WriteLine("Login realizado com sucesso!");
-                        return true;
-                    }    
-                    break;
-                }
+                return lastUser.Id;
             }
-            Console.WriteLine("Usuário ou senha inválidos.");
-            return false;
-            */
+
+            return 0; // Retorna 0 se nenhum usuário for encontrado na tabela
+        }
+
+        public Task<List<Prato>> GetAllPratosByRestauranteId(int RestauranteId)
+        {
+            return _dbContext.Pratos.Where(p => p.RestauranteId == RestauranteId).ToListAsync();
         }
         
         /*public List<Pedido> GetPedidosByStatus(string status)

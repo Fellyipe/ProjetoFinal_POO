@@ -48,5 +48,14 @@ namespace GerenciamentoPedidosComida.UI
 
             _pratoRepository.Delete(pratoId);
         }
+
+        public void ListAllPratos()
+        {
+            IEnumerable<Prato> listaPratos = _pratoRepository.GetAll();
+            foreach (var item in listaPratos)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }

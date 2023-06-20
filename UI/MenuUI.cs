@@ -48,7 +48,7 @@ namespace GerenciamentoPedidosComida.UI
                         RealizarLogin();
                         break;
                     case "2":
-                        CadastrarUsuario();
+                        _clienteUI.CreateCliente();
                         break;
                     case "3":
                         Console.WriteLine("Saindo do programa...");
@@ -159,16 +159,16 @@ namespace GerenciamentoPedidosComida.UI
                 Console.WriteLine("Login realizado com sucesso!");
                 Console.WriteLine();
 
-                /*if (autenticacao.VerificarAdministrador(email))
+                if (email == "adm@mail.com")
                 {
                     Console.WriteLine("Bem-vindo, administrador!");
                     MenuAdm();
-                }*/
-                //else
-                //{
+                }
+                else
+                {
                     Console.WriteLine("Bem-vindo, usuário!");
                     MenuPrincipal();
-                //}
+                }
             }
             else
             {
@@ -207,12 +207,22 @@ namespace GerenciamentoPedidosComida.UI
 
         private void RealizarNovoPedido()
         {
+            _pedidoUI.CreatePedido();
+            // Console.WriteLine("Id do pedido: " + _uteis.GetLastPedidoIdAsync());
+            // Console.WriteLine("Lembre-se de guardá-lo bem");
             // Implementar lógica para realizar um novo pedido
+            int pedidoId = Convert.ToInt32(_uteis.GetLastPedidoIdAsync());
+            int restauranteId = _pedidoUI.GetRestauranteIdByPedidoId(pedidoId);
+            
         }
 
         private void ListarPratosPorRestaurante()
         {
             // Implementar lógica para listar pratos por restaurante
+            _restauranteUI.ListAllRestaurantes();
+            Console.WriteLine("Digite o Id para abrir o cardápio de um restaurante");
+            int idRestaurante = Convert.ToInt32(Console.ReadLine());
+            foreach(item in _uteis.GetAllPratosByRestauranteId)
         }
 
         private void ConfirmarRecebimentoPedido()

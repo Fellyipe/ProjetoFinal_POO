@@ -48,5 +48,14 @@ namespace GerenciamentoPedidosComida.UI
 
             _restauranteRepository.Delete(restauranteId);
         }
+
+        public void ListAllRestaurantes()
+        {
+            IEnumerable<Restaurante> listaRestaurantes = _restauranteRepository.GetAll();
+            foreach (var item in listaRestaurantes)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }
