@@ -3,18 +3,13 @@
 
 namespace GerenciamentoPedidosComida.Models
 {
-    public class Pedido
+    public class Pedido : Entidade
     {
-        private int _id;
         private DateTime _dataPedido;
         private string _status = "";
         private decimal _total;
         private int _clienteId;
         private int _restauranteId;
-        public int Id {
-            get { return _id; } 
-            set { _id = value; } 
-        }
         public DateTime DataPedido  {
             get { return _dataPedido; } 
             set { _dataPedido = value; } 

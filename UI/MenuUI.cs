@@ -51,7 +51,6 @@ namespace GerenciamentoPedidosComida.UI
                 {
                     case "1":
                         RealizarLogin();
-                        AperteEnter();
                         break;
                     case "2":
                         _clienteUI.CreateCliente();
@@ -59,7 +58,6 @@ namespace GerenciamentoPedidosComida.UI
                         break;
                     case "0":
                         Console.WriteLine("Saindo do programa...");
-                        AperteEnter();
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
@@ -135,27 +133,21 @@ namespace GerenciamentoPedidosComida.UI
                 {
                     case "1":
                         GerenciarAvaliacoes();
-                        AperteEnter();
                         break;
                     case "2":
                         GerenciarClientes();
-                        AperteEnter();
                         break;
                     case "3":
                         GerenciarItemPedidos();
-                        AperteEnter();
                         break;
                     case "4":
                         GerenciarPedidos();
-                        AperteEnter();
                         break;
                     case "5":
                         GerenciarPratos();
-                        AperteEnter();
                         break;
                     case "6":
                         GerenciarRestaurantes();
-                        AperteEnter();
                         break;
                     case "0":
                         Console.WriteLine("Saindo do menu administrador...");
@@ -171,6 +163,7 @@ namespace GerenciamentoPedidosComida.UI
 
         public void RealizarLogin()
         {
+            Console.Clear();
             Console.Write("Digite seu e-mail: ");
             string email = Console.ReadLine();
 
@@ -351,30 +344,38 @@ namespace GerenciamentoPedidosComida.UI
                 {
                     case "1":
                         _restauranteUI.CreateRestaurante();
+                        AperteEnter();
                         break;
                     case "2":
                         Console.Write("Digite o Id do restaurante: ");
                         int restauranteId = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(_restauranteUI.GetRestauranteById(restauranteId));
+                        AperteEnter();
                         break;
                     case "3":
                         Console.Write("Digite o Id do restaurante que quer atualizar: ");
                         Restaurante restaurante = _restauranteUI.GetRestauranteById(Convert.ToInt32(Console.ReadLine()));
                         _restauranteUI.UpdateRestaurante(restaurante);
+                        AperteEnter();
                         break;
                     case "4":
                         Console.Write("Digite o Id do restaurante que quer excluir: ");
                         int id = Convert.ToInt32(Console.ReadLine());
                         _restauranteUI.DeleteRestaurante(id);
+                        AperteEnter();
                         break;
                     case "5":
                         _restauranteUI.ListAllRestaurantes();
+                        AperteEnter();
                         break;
                     case "0":
+                        Console.Clear();
                         Console.WriteLine("Saindo do menu Gerenciar Restaurantes...");
+                        AperteEnter();
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
+                        AperteEnter();
                         break;
                 }
             }
@@ -400,6 +401,7 @@ namespace GerenciamentoPedidosComida.UI
                 {
                     case "1":
                         _pratoUI.CreatePrato();
+                        AperteEnter();
                         break;
                     case "2":
                         Console.Write("Digite o Id do prato: ");
@@ -421,25 +423,31 @@ namespace GerenciamentoPedidosComida.UI
                             Console.WriteLine("Entrada inválida. Digite um número.");
                         }
                         Console.WriteLine(_pratoUI.GetPratoById(pratoId));
+                        AperteEnter();
                         break;
                     case "3":
                         Console.Write("Digite o Id do prato que quer atualizar: ");
                         Prato prato = _pratoUI.GetPratoById(Convert.ToInt32(Console.ReadLine()));
                         _pratoUI.UpdatePrato(prato);
+                        AperteEnter();
                         break;
                     case "4":
                         Console.Write("Digite o Id do prato que quer excluir: ");
                         int id = Convert.ToInt32(Console.ReadLine());
                         _pratoUI.DeletePrato(id);
+                        AperteEnter();
                         break;
                     case "5":
                         _pratoUI.ListAllPratos();
+                        AperteEnter();
                         break;
                     case "0":
                         Console.WriteLine("Saindo do menu Gerenciar Pratos...");
+                        AperteEnter();
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
+                        AperteEnter();
                         break;
                 }
             }
@@ -467,30 +475,37 @@ namespace GerenciamentoPedidosComida.UI
                         Console.Write("Digite o ID do restaurante: ");
                         int restauranteId = int.Parse(Console.ReadLine());
                         _pedidoUI.CreatePedido(_cliente.Id, restauranteId);
+                        AperteEnter();
                         break;
                     case "2":
                         Console.Write("Digite o Id do pedido: ");
                         int pedidoId = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(_pedidoUI.GetPedidoById(pedidoId));
+                        AperteEnter();
                         break;
                     case "3":
                         Console.Write("Digite o Id do pedido que quer atualizar: ");
                         Pedido pedido = _pedidoUI.GetPedidoById(Convert.ToInt32(Console.ReadLine()));
                         _pedidoUI.UpdatePedido(pedido);
+                        AperteEnter();
                         break;
                     case "4":
                         Console.Write("Digite o Id do pedido que quer excluir: ");
                         int id = Convert.ToInt32(Console.ReadLine());
                         _pedidoUI.DeletePedido(id);
+                        AperteEnter();
                         break;
                     case "5":
                         _pedidoUI.ListAllPedidos();
+                        AperteEnter();
                         break;
                     case "0":
                         Console.WriteLine("Saindo do menu Gerenciar Pedidos...");
+                        AperteEnter();
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
+                        AperteEnter();
                         break;
                 }
             }
@@ -516,30 +531,37 @@ namespace GerenciamentoPedidosComida.UI
                 {
                     case "1":
                         //_itemPedidoUI.CreateItemPedido();
+                        AperteEnter();
                         break;
                     case "2":
                         Console.Write("Digite o Id do itemPedido: ");
                         int itemPedidoId = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(_itemPedidoUI.GetItemPedidoById(itemPedidoId));
+                        AperteEnter();
                         break;
                     case "3":
                         Console.Write("Digite o Id do itemPedido que quer atualizar: ");
                         ItemPedido itemPedido = _itemPedidoUI.GetItemPedidoById(Convert.ToInt32(Console.ReadLine()));
                         _itemPedidoUI.UpdateItemPedido(itemPedido);
+                        AperteEnter();
                         break;
                     case "4":
                         Console.Write("Digite o Id do itemPedido que quer excluir: ");
                         int id = Convert.ToInt32(Console.ReadLine());
                         _itemPedidoUI.DeleteItemPedido(id);
+                        AperteEnter();
                         break;
                     case "5":
                         _itemPedidoUI.ListAllItemPedidos();
+                        AperteEnter();
                         break;
                     case "0":
                         Console.WriteLine("Saindo do menu Gerenciar ItemPedidos...");
+                        AperteEnter();
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
+                        AperteEnter();
                         break;
                 }
             }
@@ -565,30 +587,37 @@ namespace GerenciamentoPedidosComida.UI
                 {
                     case "1":
                         _clienteUI.CreateCliente();
+                        AperteEnter();
                         break;
                     case "2":
                         Console.Write("Digite o Id do cliente: ");
                         int clienteId = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(_clienteUI.GetClienteById(clienteId));
+                        AperteEnter();
                         break;
                     case "3":
                         Console.Write("Digite o Id do cliente que quer atualizar: ");
                         Cliente cliente = _clienteUI.GetClienteById(Convert.ToInt32(Console.ReadLine()));
                         _clienteUI.UpdateCliente(cliente);
+                        AperteEnter();
                         break;
                     case "4":
                         Console.Write("Digite o Id do cliente que quer excluir: ");
                         int id = Convert.ToInt32(Console.ReadLine());
                         _clienteUI.DeleteCliente(id);
+                        AperteEnter();
                         break;
                     case "5":
                         _clienteUI.ListAllClientes();
+                        AperteEnter();
                         break;
                     case "0":
                         Console.WriteLine("Saindo do menu Gerenciar Clientes...");
+                        AperteEnter();
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
+                        AperteEnter();
                         break;
                 }
             }
@@ -614,30 +643,38 @@ namespace GerenciamentoPedidosComida.UI
                 {
                     case "1":
                         //_avaliacaoUI.CreateAvaliacao();
+                        AperteEnter();
                         break;
                     case "2":
                         Console.Write("Digite o Id do avaliacao: ");
                         int avaliacaoId = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine(_avaliacaoUI.GetAvaliacaoById(avaliacaoId));
+                        AperteEnter();
                         break;
                     case "3":
                         Console.Write("Digite o Id do avaliacao que quer atualizar: ");
                         Avaliacao avaliacao = _avaliacaoUI.GetAvaliacaoById(Convert.ToInt32(Console.ReadLine()));
                         _avaliacaoUI.UpdateAvaliacao(avaliacao);
+                        AperteEnter();
                         break;
                     case "4":
                         Console.Write("Digite o Id do avaliacao que quer excluir: ");
                         int id = Convert.ToInt32(Console.ReadLine());
                         _avaliacaoUI.DeleteAvaliacao(id);
+                        AperteEnter();
                         break;
                     case "5":
                         _avaliacaoUI.ListAllAvaliacaos();
+                        AperteEnter();
                         break;
                     case "0":
+                        Console.Clear();
                         Console.WriteLine("Saindo do menu Gerenciar Avaliacaos...");
+                        AperteEnter();
                         return;
                     default:
                         Console.WriteLine("Opção inválida. Tente novamente.");
+                        AperteEnter();
                         break;
                 }
             }

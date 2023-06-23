@@ -1,18 +1,13 @@
 
 namespace GerenciamentoPedidosComida.Models
 {
-    public class Cliente
+    public class Cliente : Entidade
     {   
-        private int _id;
         private string _nome = "";
         private string _endereco = "";
         private string _email = "";
         private string _senha = "";
         private string _numeroTelefone = "";
-        public int Id {
-            get { return _id; } 
-            set { _id = value; } 
-        }
         public string Nome {
             get { return _nome; } 
             set

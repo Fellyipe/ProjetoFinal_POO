@@ -1,17 +1,12 @@
 
 namespace GerenciamentoPedidosComida.Models
 {
-    public class Prato
+    public class Prato : Entidade
     {
-        public int _id;
         public string _nomeItem = "";
         public string _descricao = "";
         public decimal _preco;
-        public int _restauranteId;         
-        public int Id {
-            get { return _id; } 
-            set { _id = value; } 
-        }
+        public int _restauranteId;
         public string NomeItem {
             get { return _nomeItem; } 
             set
