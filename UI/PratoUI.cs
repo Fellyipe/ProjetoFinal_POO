@@ -1,12 +1,14 @@
 using GerenciamentoPedidosComida.Interfaces;
 using GerenciamentoPedidosComida.Models;
 using GerenciamentoPedidosComida.Repositories;
+using GerenciamentoPedidosComida.Services;
 
 namespace GerenciamentoPedidosComida.UI
 {
     public class PratoUI
     {
         private IRepository<Prato> _pratoRepository;
+        private Verificacao _verificacao;
 
         public PratoUI()
         {
@@ -19,9 +21,11 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Nome do prato: ");
             string nomeItem = Console.ReadLine();
+            nomeItem = _verificacao.VeriicarNulidade(nomeItem);
 
             Console.Write("Descrição: ");
             string descricao = Console.ReadLine();
+            descricao = _verificacao.VeriicarNulidade(descricao);
 
             Console.Write("Preço: ");
             decimal preco = Convert.ToDecimal(Console.ReadLine());

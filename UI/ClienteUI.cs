@@ -1,6 +1,7 @@
 using GerenciamentoPedidosComida.Interfaces;
 using GerenciamentoPedidosComida.Models;
 using GerenciamentoPedidosComida.Repositories;
+using GerenciamentoPedidosComida.Services;
 using System.Net.Mail;
 
 namespace GerenciamentoPedidosComida.UI
@@ -8,6 +9,7 @@ namespace GerenciamentoPedidosComida.UI
     public class ClienteUI
     {
         private IRepository<Cliente> _clienteRepository;
+        private Verificacao _verificacao;
 
         public ClienteUI()
         {
@@ -21,12 +23,16 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Nome: ");
             string nome = Console.ReadLine();
+            nome = _verificacao.VeriicarNulidade(nome);
 
             Console.Write("Endereço: ");
             string endereco = Console.ReadLine();
+            endereco = _verificacao.VeriicarNulidade(endereco);
 
             Console.Write("Email: ");
             string email = Console.ReadLine();
+            email = _verificacao.VeriicarNulidade(email);
+
             while(!ValidarEmail(email))
             {
                 Console.WriteLine("Email inválido, utilize o formato correto");
@@ -42,10 +48,11 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Senha: ");
             string senha = Console.ReadLine();
+            senha = _verificacao.VeriicarNulidade(senha);
 
             Console.Write("Número de Telefone: ");
             string numeroTelefone = Console.ReadLine();
-
+            numeroTelefone = _verificacao.VeriicarNulidade(numeroTelefone);
 
             Cliente cliente = new Cliente
             {

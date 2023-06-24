@@ -21,6 +21,7 @@ namespace GerenciamentoPedidosComida.UI
         private ItemPedidoUI _itemPedidoUI;
         private PratoUI _pratoUI;
         private Uteis _uteis;
+        private Verificacao _verificacao;
         private Cliente _cliente;
 
         public Menu()
@@ -174,7 +175,7 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Digite seu e-mail: ");
             string email = Console.ReadLine();
-            while(!_clienteUI.ValidarEmail(email))
+            while(!_clienteUI.ValidarEmail(_verificacao.VeriicarNulidade(email)))
             {
                 Console.WriteLine("Email inválido, utilize o formato correto");
                 Console.Write("Email: ");
@@ -781,10 +782,12 @@ namespace GerenciamentoPedidosComida.UI
             Console.ReadKey();
         }
     
-        bool VerificarNumero(string entrada, out int numero)
+        private bool VerificarNumero(string entrada, out int numero)
         {
             return int.TryParse(entrada, out numero);
         }
+
+        
 
     }
 }

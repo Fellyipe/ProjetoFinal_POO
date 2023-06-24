@@ -1,12 +1,14 @@
 using GerenciamentoPedidosComida.Interfaces;
 using GerenciamentoPedidosComida.Models;
 using GerenciamentoPedidosComida.Repositories;
+using GerenciamentoPedidosComida.Services;
 
 namespace GerenciamentoPedidosComida.UI
 {
     public class RestauranteUI
     {
         private IRepository<Restaurante> _restauranteRepository;
+        private Verificacao _verificacao;
 
         public RestauranteUI()
         {
@@ -19,13 +21,15 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Nome: ");
             string nome = Console.ReadLine();
+            nome = _verificacao.VeriicarNulidade(nome);
 
             Console.Write("Endereço: ");
             string endereco = Console.ReadLine();
+            endereco = _verificacao.VeriicarNulidade(endereco);
 
             Console.Write("Número de Telefone: ");
             string numeroTelefone = Console.ReadLine();
-
+            numeroTelefone = _verificacao.VeriicarNulidade(numeroTelefone);
 
             Restaurante restaurante = new Restaurante
             {
@@ -57,12 +61,15 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Nome: ");
             string nome = Console.ReadLine();
+            nome = _verificacao.VeriicarNulidade(nome);
 
             Console.Write("Endereço: ");
             string endereco = Console.ReadLine();
+            endereco = _verificacao.VeriicarNulidade(endereco);
 
             Console.Write("Número de Telefone: ");
             string numeroTelefone = Console.ReadLine();
+            numeroTelefone = _verificacao.VeriicarNulidade(numeroTelefone);
 
 
             restaurante.Nome = nome;
