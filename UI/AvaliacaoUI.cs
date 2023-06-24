@@ -64,9 +64,13 @@ namespace GerenciamentoPedidosComida.UI
         public void ListAllAvaliacaos()
         {
             IEnumerable<Avaliacao> listaAvaliacaos = _avaliacaoRepository.GetAll();
+            if(listaAvaliacaos.Count() == 0)
+            {
+                Console.WriteLine("Não há nenhum restaurante cadastrado.");
+            }
             foreach (var item in listaAvaliacaos)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item + "\r\n");
             }
         }
     }

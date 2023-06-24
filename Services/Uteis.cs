@@ -40,10 +40,30 @@ namespace GerenciamentoPedidosComida.Services
             return _dbContext.Pratos.Where(p => p.RestauranteId == restauranteId).ToList();
         }
 
-        public List<Pedido> GetAllPedidosEntregues()
+        public List<Pedido> GetAllPedidosByStatus(string status)
         {
-            return _dbContext.Pedidos.Where(p => p.Status == "Entregue").ToList();
+            return _dbContext.Pedidos.Where(p => p.Status == status).ToList();
         }
+
+        public ItemPedido GetItemPedidoByPedidoIdAndPratoId(int pedidoId, int pratoId)
+        {
+            return _dbContext.ItemPedidos.FirstOrDefault(i => i.PedidoId == pedidoId && i.PratoId == pratoId);
+        }
+
+        public void UpdateQuantidadeInItemPedido(int pedidoId, int pratoId, int quantidade)
+        {
+            var itemPedido = _dbContext.ItemPedidos.FirstOrDefault(p => p.PedidoId == pedidoId && p.PratoId == pratoId);
+            // Modificar os valores das colunas relevantes
+            itemPedido.Quantidade = quantidade;
+
+            // Executar o update no banco de dados
+            _dbContext.SaveChanges();
+        
+        }
+
+
+        
+
 
         
         

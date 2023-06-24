@@ -42,12 +42,11 @@ namespace GerenciamentoPedidosComida.UI
             Restaurante? restaurante = _restauranteRepository.GetById(restauranteId);
             if (restaurante != null)
             {
-                //Console.WriteLine(restaurante);
                 return restaurante;
             }
             else
             {
-                //Console.WriteLine("Não há nenhum restaurante com esse Id");
+                Console.WriteLine("Não há nenhum restaurante com esse Id");
                 return null;
             }
         }
@@ -84,9 +83,13 @@ namespace GerenciamentoPedidosComida.UI
         public void ListAllRestaurantes()
         {
             IEnumerable<Restaurante> listaRestaurantes = _restauranteRepository.GetAll();
+            if(listaRestaurantes.Count() == 0)
+            {
+                Console.WriteLine("Não há nenhum restaurante cadastrado.");
+            }
             foreach (var item in listaRestaurantes)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item + "\r\n");
             }
         }
     }

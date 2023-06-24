@@ -73,9 +73,13 @@ namespace GerenciamentoPedidosComida.UI
         public void ListAllPratos()
         {
             IEnumerable<Prato> listaPratos = _pratoRepository.GetAll();
+            if(listaPratos.Count() == 0)
+            {
+                Console.WriteLine("Não há nenhum prato cadastrado.");
+            }
             foreach (var item in listaPratos)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item + "\r\n");
             }
         }
     }

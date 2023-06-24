@@ -38,12 +38,11 @@ namespace GerenciamentoPedidosComida.UI
             Pedido? pedido = _pedidoRepository.GetById(pedidoId);
             if (pedido != null)
             {
-                // Console.WriteLine(pedido);
                 return pedido;
             }
             else
             {
-                // Console.WriteLine("Não há nenhum pedido com esse Id");
+                Console.WriteLine("Não há nenhum pedido com esse Id");
                 return null;
             }
         }
@@ -72,9 +71,13 @@ namespace GerenciamentoPedidosComida.UI
         public void ListAllPedidos()
         {
             IEnumerable<Pedido> listaPedidos = _pedidoRepository.GetAll();
+            if(listaPedidos.Count() == 0)
+            {
+                Console.WriteLine("Não há nenhum pedido cadastrado.");
+            }
             foreach (var item in listaPedidos)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item + "\r\n");
             }
         }
     }

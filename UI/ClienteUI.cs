@@ -1,6 +1,7 @@
 using GerenciamentoPedidosComida.Interfaces;
 using GerenciamentoPedidosComida.Models;
 using GerenciamentoPedidosComida.Repositories;
+using System.Net.Mail;
 
 namespace GerenciamentoPedidosComida.UI
 {
@@ -26,6 +27,12 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Email: ");
             string email = Console.ReadLine();
+            while(!ValidarEmail(email))
+            {
+                Console.WriteLine("Email inválido, utilize o formato correto");
+                Console.Write("Email: ");
+                email = Console.ReadLine();
+            }
             while(IsEmailAlreadyTaken(email))
             {
                 Console.WriteLine("Email já utilizado, use outro");
@@ -57,12 +64,11 @@ namespace GerenciamentoPedidosComida.UI
             Cliente? cliente = _clienteRepository.GetById(clienteId);
             if (cliente != null)
             {
-                //Console.WriteLine(cliente);
                 return cliente;
             }
             else
             {
-                //Console.WriteLine("Não há nenhum cliente com esse Id");
+                Console.WriteLine("Não há nenhum cliente com esse Id");
                 return null;
             }
         }
@@ -100,9 +106,25 @@ namespace GerenciamentoPedidosComida.UI
         public void ListAllClientes()
         {
             IEnumerable<Cliente> listaClientes = _clienteRepository.GetAll();
+            if(listaClientes.Count() == 0)
+            {
+                Console.WriteLine("Não há nenhum cliente cadastrado.");
+            }
             foreach (var item in listaClientes)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item + "\r\n");
+            }
+        }
+        public bool ValidarEmail(string email)
+        {
+            try
+            {
+                MailAddress endereco = new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
             }
         }
     }
