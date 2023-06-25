@@ -14,6 +14,7 @@ namespace GerenciamentoPedidosComida.UI
         public ClienteUI()
         {
             _clienteRepository = new Repository<Cliente>();
+            _verificacao = new Verificacao();
             
         }
 
@@ -37,13 +38,13 @@ namespace GerenciamentoPedidosComida.UI
             {
                 Console.WriteLine("Email inválido, utilize o formato correto");
                 Console.Write("Email: ");
-                email = Console.ReadLine();
+                email = _verificacao.VeriicarNulidade(Console.ReadLine());
             }
             while(IsEmailAlreadyTaken(email))
             {
                 Console.WriteLine("Email já utilizado, use outro");
                 Console.Write("Email: ");
-                email = Console.ReadLine();
+                email = _verificacao.VeriicarNulidade(Console.ReadLine());
             }
 
             Console.Write("Senha: ");

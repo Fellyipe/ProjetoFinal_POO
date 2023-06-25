@@ -7,7 +7,7 @@ namespace GerenciamentoPedidosComida.Services
     {
         public string VeriicarNulidade(string entrada)
         {
-            while(entrada == "")
+            while(string.IsNullOrEmpty(entrada))
             {
                 Console.WriteLine("O campo não pode ser nulo!");
                 Console.WriteLine("Inisira um dado não nulo");
@@ -18,7 +18,7 @@ namespace GerenciamentoPedidosComida.Services
         public int VerificarNumero(string entrada)
         {
             int numero;
-            while(int.TryParse(entrada, out numero))
+            while(!int.TryParse(entrada, out numero))
             {
                 Console.WriteLine("Por favor, digite apenas números");
                 entrada = Console.ReadLine();
