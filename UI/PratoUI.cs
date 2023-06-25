@@ -31,7 +31,7 @@ namespace GerenciamentoPedidosComida.UI
             decimal preco = Convert.ToDecimal(Console.ReadLine());
 
             Console.Write("Id do restaurante: ");
-            int restauranteId = Convert.ToInt32(Console.ReadLine());
+            int restauranteId = _verificacao.VerificarNumero(Console.ReadLine());
 
             Prato prato = new Prato
             {

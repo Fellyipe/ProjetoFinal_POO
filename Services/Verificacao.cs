@@ -15,5 +15,16 @@ namespace GerenciamentoPedidosComida.Services
             }
             return entrada;
         }
+        public int VerificarNumero(string entrada)
+        {
+            int numero;
+            while(int.TryParse(entrada, out numero))
+            {
+                Console.WriteLine("Por favor, digite apenas números");
+                entrada = Console.ReadLine();
+            }
+            return numero;
+        }
+
     }
 }

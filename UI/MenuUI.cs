@@ -174,17 +174,9 @@ namespace GerenciamentoPedidosComida.UI
             Console.Clear();
 
             Console.Write("Digite seu e-mail: ");
-            string email = Console.ReadLine();
-            while(!_clienteUI.ValidarEmail(_verificacao.VeriicarNulidade(email)))
-            {
-                Console.WriteLine("Email inválido, utilize o formato correto");
-                Console.Write("Email: ");
-                email = Console.ReadLine();
-            }
-
-
+            string email = _verificacao.VeriicarNulidade(Console.ReadLine());
             Console.Write("Digite sua senha: ");
-            string senha = Console.ReadLine();
+            string senha = _verificacao.VeriicarNulidade(Console.ReadLine());
 
             Cliente cliente = _uteis.Login(email, senha);
             if (cliente != null)
@@ -782,10 +774,7 @@ namespace GerenciamentoPedidosComida.UI
             Console.ReadKey();
         }
     
-        private bool VerificarNumero(string entrada, out int numero)
-        {
-            return int.TryParse(entrada, out numero);
-        }
+        
 
         
 
