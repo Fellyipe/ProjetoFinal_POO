@@ -1,22 +1,30 @@
 using GerenciamentoPedidosComida.Interfaces;
 using GerenciamentoPedidosComida.Models;
 using GerenciamentoPedidosComida.Repositories;
+using GerenciamentoPedidosComida.Services;
 
 namespace GerenciamentoPedidosComida.UI
 {
     public class AvaliacaoUI
     {
         private IRepository<Avaliacao> _avaliacaoRepository;
+        private Verificacao _verificacao;
 
         public AvaliacaoUI()
         {
             _avaliacaoRepository = new Repository<Avaliacao>();
+            _verificacao = new Verificacao();
         }
 
         public void CreateAvaliacao(Pedido pedido)
         {
             Console.WriteLine("Avalie o seu pedido (1 a 5):");
-            int classificacao = Convert.ToInt32(Console.ReadLine());
+            int classificacao = _verificacao.VerificarNumero(Console.ReadLine());
+            while(classificacao < 1 || classificacao > 5)
+            {
+                Console.WriteLine("Por favor, escolha um número entre 1 a 5 para avaliar o pedido");
+                classificacao = _verificacao.VerificarNumero(Console.ReadLine());
+            }
             Console.WriteLine("Faça um comentário (opcional)");
             string comentario = Console.ReadLine(); 
             //while ()

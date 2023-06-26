@@ -104,9 +104,9 @@ namespace GerenciamentoPedidosComida.UI
                     case "4":
                         ListarPedidosRealizados();
                         AperteEnter();
+                        Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
                         break;
                     case "0":
-                        Console.Clear();
                         Console.WriteLine("Saindo do programa...");
                         AperteEnter();
                         return;
@@ -211,29 +211,25 @@ namespace GerenciamentoPedidosComida.UI
             }
         }
 
-        private async void RealizarNovoPedido()
+        private void RealizarNovoPedido()
         {
             Console.Clear();
             Console.Write("Digite o ID do restaurante: ");
             int restauranteId = _verificacao.VerificarNumero(/*_verificacao.VeriicarNulidade(*/Console.ReadLine()/*)*/);
             // _pedidoUI.CreatePedido(_cliente.Id, restauranteId);
-            // Console.WriteLine("Id do pedido: " + _uteis.GetLastPedidoIdAsync());
-            // Console.WriteLine("Lembre-se de guardá-lo bem");
-            // Implementar lógica para realizar um novo pedido
-
             /*int pedidoId = _uteis.GetLastPedido().Id;
             Console.WriteLine("PedidoId: " + pedidoId);*/
             var listaPratos = _uteis.GetAllPratosByRestauranteId(restauranteId);
             List<int> listaPratosId = new List<int>();
-            Console.WriteLine("Cardápio");
+            Console.WriteLine("\r\nCardápio\r\n");
             foreach (var item in listaPratos)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item + "\r\n");
                 listaPratosId.Add(item.Id);
             }
             if (listaPratos.Count == 0) 
             {
-                Console.WriteLine("Não há nenhum prato no cardápio deste restaurante :(");
+                Console.WriteLine("Não há nenhum prato no cardápio deste restaurante");
                 Console.WriteLine("Deletando pedido...");
                 //_pedidoUI.DeletePedido(pedidoId);
                 return;
@@ -244,12 +240,33 @@ namespace GerenciamentoPedidosComida.UI
             Console.WriteLine("Adicione os pratos disponíveis (digite o Id para adicionar ao carrinho ou 0 para encerrar o pedido):");
             int pratoId;
             decimal totalPedido = 0;
+            bool vazio = true;
             while (true)
             {
                 Console.Write("Digite o Id do prato: ");
                 pratoId = _verificacao.VerificarNumero(Console.ReadLine());
                 if (pratoId == 0)
                 {
+                    if(vazio)
+                    {
+                        Console.WriteLine("Certeza que não quer adicionar nenhum prato ao pedido?\r\nO pedido será cancelado");
+                        Console.WriteLine("1 - Voltar à seleção de pratos\r\n2 - Encerrar");
+                        string opcao = Console.ReadLine();
+                        while(opcao != "1" && opcao != "2")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Por favor, selecione uma das duas opções\r\n1 - Voltar à seleção de pratos\r\n2 - Encerrar");
+                            opcao = Console.ReadLine();
+                        }
+                        if(opcao == "1")
+                        {
+                            continue;
+                        }
+                        else if(opcao == "2")
+                        {
+                            break;
+                        }
+                    }
                     break;
                 }
                 if(!listaPratosId.Contains(pratoId))
@@ -257,6 +274,7 @@ namespace GerenciamentoPedidosComida.UI
                     Console.WriteLine("Por favor, adicione apenas os pratos disponíveis no cardápio do restaurante");
                     continue;
                 }
+                vazio = false;
                 decimal precoUnitario = _pratoUI.GetPratoById(pratoId).Preco;
                 Console.Write("Digite a quantidade: ");
                 int quantidade = _verificacao.VerificarNumero(Console.ReadLine());
@@ -289,18 +307,23 @@ namespace GerenciamentoPedidosComida.UI
             pedido.Id = pedidoId;
             pedido.Total = totalPedido;
             _pedidoUI.UpdatePedido(pedido);
+            Console.Clear();
             Console.WriteLine("Pedido realizado!");
             Console.WriteLine("Id do pedido: " + pedidoId);
             Console.WriteLine("Valor total: " + pedido.Total);
         }
 
-        private async void ListarPratosPorRestaurante()
+        private void ListarPratosPorRestaurante()
         {
             // Implementar lógica para listar pratos por restaurante
             Console.Clear();
             _restauranteUI.ListAllRestaurantes();
             Console.WriteLine("Digite o Id para abrir o cardápio de um restaurante");
             int restauranteId = _verificacao.VerificarNumero(Console.ReadLine());
+            if(_restauranteUI.GetRestauranteById(restauranteId) == null)
+            {
+                return;
+            }
             var listaPratos = _uteis.GetAllPratosByRestauranteId(restauranteId);
             Console.Clear();
             Console.WriteLine(_restauranteUI.GetRestauranteById(restauranteId)._nome + "\r\nCardápio\r\n");
@@ -310,17 +333,39 @@ namespace GerenciamentoPedidosComida.UI
             }
         }
 
-        private async void ConfirmarRecebimentoPedido()
+        private void ConfirmarRecebimentoPedido()
         {
-            _pedidoUI.ListAllPedidos();
-            var listaPedidos = _uteis.GetAllPedidosByStatus("Entregue");
+            Console.Clear();
+            var listaPedidos = _uteis.GetAllPedidosByStatus("Em andamento");
+            Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
+            listaPedidos = listaPedidos.Where(item => item.ClienteId == _cliente.Id).ToList();
+            if(listaPedidos.Count() == 0)
+            {
+                Console.Clear();
+                Console.WriteLine("Não há nenhum pedido em andamento em seu nome");
+                return;
+            }
+            List<int> listaPedidosId = new List<int>();
             foreach (var item in listaPedidos)
             {
-                Console.WriteLine(item);
+                if(item.ClienteId == _cliente.Id)
+                {
+                    listaPedidosId.Add(item.Id);
+                    Console.WriteLine(item + "\r\n");
+                }
             }
             Console.Write("Digite o Id do pedido: ");
             int pedidoId = _verificacao.VerificarNumero(Console.ReadLine());
             Pedido pedido = _pedidoUI.GetPedidoById(pedidoId);
+            if(pedido == null)
+            {
+                return;
+            }
+            if(!listaPedidosId.Contains(pedidoId))
+            {
+                Console.WriteLine("Não há nenhum pedido com esse Id em seu nome");
+                return;
+            }
             pedido.Status = "Entregue";
             _pedidoUI.UpdatePedido(pedido);
             Console.Clear();
@@ -342,22 +387,33 @@ namespace GerenciamentoPedidosComida.UI
             }
             List<Pedido> listaPedidos = null;
             Console.Clear();
-            Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
+            Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
             if(opcao == "1")
             {
+                listaPedidos = _uteis.GetAllPedidosByStatus("Em andamento");
+                listaPedidos = listaPedidos.Where(item => item.ClienteId == _cliente.Id).ToList();
+                if(listaPedidos.Count() == 0)
+                {
+                    Console.WriteLine("Não há nenhum pedido em andamento em seu nome");
+                    return;
+                }
                 Console.WriteLine("Pedidos em andamento:");
-                listaPedidos = _uteis.GetAllPedidosByStatus("Entregue");
-                    Console.WriteLine(listaPedidos.Count);
                 foreach (var item in listaPedidos)
                 {
                     Console.WriteLine(item+ "\r\n");
                 }
-                Console.Clear();
+                //Console.Clear();
             }
             else if(opcao == "2")
             {
-                Console.WriteLine("Pedidos entregues:");
                 listaPedidos = _uteis.GetAllPedidosByStatus("Entregue");
+                listaPedidos = listaPedidos.Where(item => item.ClienteId == _cliente.Id).ToList();
+                if(listaPedidos.Count() == 0)
+                {
+                    Console.WriteLine("Não há nenhum pedido entregue em seu nome");
+                    return;
+                }
+                Console.WriteLine("Pedidos entregues:");
                 foreach (var item in listaPedidos)
                 {
                     Console.WriteLine(item + "\r\n");
@@ -392,7 +448,7 @@ namespace GerenciamentoPedidosComida.UI
                     case "2":
                         Console.Clear();
                         Console.Write("Digite o Id do restaurante: ");
-                        int restauranteId_GET = Convert.ToInt32(Console.ReadLine());
+                        int restauranteId_GET = _verificacao.VerificarNumero(Console.ReadLine());
                         Restaurante restaurante_GET = _restauranteUI.GetRestauranteById(restauranteId_GET);
                         if(restaurante_GET != null)
                         {
@@ -403,7 +459,7 @@ namespace GerenciamentoPedidosComida.UI
                     case "3":
                         Console.Clear();
                         Console.Write("Digite o Id do restaurante que quer atualizar: ");
-                        int restauranteId_UPDATE = Convert.ToInt32(Console.ReadLine());
+                        int restauranteId_UPDATE = _verificacao.VerificarNumero(Console.ReadLine());
                         Restaurante restaurante_UPDATE = _restauranteUI.GetRestauranteById(restauranteId_UPDATE);
                         if(restaurante_UPDATE != null)
                         {
@@ -414,7 +470,7 @@ namespace GerenciamentoPedidosComida.UI
                     case "4":
                         Console.Clear();
                         Console.Write("Digite o Id do restaurante que quer excluir: ");
-                        int restauranteId_DELETE = Convert.ToInt32(Console.ReadLine());
+                        int restauranteId_DELETE = _verificacao.VerificarNumero(Console.ReadLine());
                         Restaurante restaurante_DELETE = _restauranteUI.GetRestauranteById(restauranteId_DELETE);
                         if(restaurante_DELETE != null)
                         {
@@ -467,37 +523,21 @@ namespace GerenciamentoPedidosComida.UI
                     case "2":
                         Console.Clear();
                         Console.Write("Digite o Id do prato: ");
-                        int pratoId = Convert.ToInt32(Console.ReadLine());
-                        
-                        Console.WriteLine("Digite um número:");
-                        string entrada = Console.ReadLine();
-
-                        int numero;
-
-                        if (int.TryParse(entrada, out numero))
-                        {
-                            // A conversão para int foi bem-sucedida
-                            Console.WriteLine("Número válido: " + numero);
-                        }
-                        else
-                        {
-                            // A conversão falhou, o usuário digitou uma letra ou um valor inválido
-                            Console.WriteLine("Entrada inválida. Digite um número.");
-                        }
+                        int pratoId = _verificacao.VerificarNumero(Console.ReadLine());
                         Console.WriteLine(_pratoUI.GetPratoById(pratoId));
                         AperteEnter();
                         break;
                     case "3":
                         Console.Clear();
                         Console.Write("Digite o Id do prato que quer atualizar: ");
-                        Prato prato = _pratoUI.GetPratoById(Convert.ToInt32(Console.ReadLine()));
+                        Prato prato = _pratoUI.GetPratoById(_verificacao.VerificarNumero(Console.ReadLine()));
                         _pratoUI.UpdatePrato(prato);
                         AperteEnter();
                         break;
                     case "4":
                         Console.Clear();
                         Console.Write("Digite o Id do prato que quer excluir: ");
-                        int id = Convert.ToInt32(Console.ReadLine());
+                        int id = _verificacao.VerificarNumero(Console.ReadLine());
                         _pratoUI.DeletePrato(id);
                         AperteEnter();
                         break;
@@ -548,21 +588,21 @@ namespace GerenciamentoPedidosComida.UI
                     case "2":
                         Console.Clear();
                         Console.Write("Digite o Id do pedido: ");
-                        int pedidoId = Convert.ToInt32(Console.ReadLine());
+                        int pedidoId = _verificacao.VerificarNumero(Console.ReadLine());
                         Console.WriteLine(_pedidoUI.GetPedidoById(pedidoId));
                         AperteEnter();
                         break;
                     case "3":
                         Console.Clear();
                         Console.Write("Digite o Id do pedido que quer atualizar: ");
-                        Pedido pedido = _pedidoUI.GetPedidoById(Convert.ToInt32(Console.ReadLine()));
+                        Pedido pedido = _pedidoUI.GetPedidoById(_verificacao.VerificarNumero(Console.ReadLine()));
                         _pedidoUI.UpdatePedido(pedido);
                         AperteEnter();
                         break;
                     case "4":
                         Console.Clear();
                         Console.Write("Digite o Id do pedido que quer excluir: ");
-                        int id = Convert.ToInt32(Console.ReadLine());
+                        int id = _verificacao.VerificarNumero(Console.ReadLine());
                         _pedidoUI.DeletePedido(id);
                         AperteEnter();
                         break;
@@ -614,27 +654,29 @@ namespace GerenciamentoPedidosComida.UI
                     case "2":
                         Console.Clear();
                         Console.Write("Digite o Id do Pedido: ");
-                        pedidoId = Convert.ToInt32(Console.ReadLine());
+                        pedidoId = _verificacao.VerificarNumero(Console.ReadLine());
                         Console.Write("Digite o Id do Prato: ");
-                        pratoId = Convert.ToInt32(Console.ReadLine());
+                        pratoId = _verificacao.VerificarNumero(Console.ReadLine());
                         Console.WriteLine(_itemPedidoUI.GetItemPedidoById(pedidoId, pratoId));
                         AperteEnter();
                         break;
                     case "3":
                         Console.Clear();
                         Console.Write("Digite o Id do Pedido: ");
-                        pedidoId = Convert.ToInt32(Console.ReadLine());
+                        pedidoId = _verificacao.VerificarNumero(Console.ReadLine());
                         Console.Write("Digite o Id do Prato: ");
-                        pratoId = Convert.ToInt32(Console.ReadLine());
+                        pratoId = _verificacao.VerificarNumero(Console.ReadLine());
                         ItemPedido itemPedido = _itemPedidoUI.GetItemPedidoById(pedidoId, pratoId);
                         _itemPedidoUI.UpdateItemPedido(itemPedido);
                         AperteEnter();
                         break;
                     case "4":
                         Console.Clear();
-                        Console.Write("Digite o Id do itemPedido que quer excluir: ");
-                        int id = Convert.ToInt32(Console.ReadLine());
-                        _itemPedidoUI.DeleteItemPedido(id);
+                        Console.Write("Digite o Id do Pedido: ");
+                        pedidoId = _verificacao.VerificarNumero(Console.ReadLine());
+                        Console.Write("Digite o Id do Prato: ");
+                        pratoId = _verificacao.VerificarNumero(Console.ReadLine());
+                        _itemPedidoUI.DeleteItemPedido(pedidoId, pratoId);
                         AperteEnter();
                         break;
                     case "5":
@@ -682,21 +724,21 @@ namespace GerenciamentoPedidosComida.UI
                     case "2":
                         Console.Clear();
                         Console.Write("Digite o Id do cliente: ");
-                        int clienteId = Convert.ToInt32(Console.ReadLine());
+                        int clienteId = _verificacao.VerificarNumero(Console.ReadLine());
                         Console.WriteLine(_clienteUI.GetClienteById(clienteId));
                         AperteEnter();
                         break;
                     case "3":
                         Console.Clear();
                         Console.Write("Digite o Id do cliente que quer atualizar: ");
-                        Cliente cliente = _clienteUI.GetClienteById(Convert.ToInt32(Console.ReadLine()));
+                        Cliente cliente = _clienteUI.GetClienteById(_verificacao.VerificarNumero(Console.ReadLine()));
                         _clienteUI.UpdateCliente(cliente);
                         AperteEnter();
                         break;
                     case "4":
                         Console.Clear();
                         Console.Write("Digite o Id do cliente que quer excluir: ");
-                        int id = Convert.ToInt32(Console.ReadLine());
+                        int id = _verificacao.VerificarNumero(Console.ReadLine());
                         _clienteUI.DeleteCliente(id);
                         AperteEnter();
                         break;
@@ -745,21 +787,21 @@ namespace GerenciamentoPedidosComida.UI
                     case "2":
                         Console.Clear();
                         Console.Write("Digite o Id do avaliacao: ");
-                        int avaliacaoId = Convert.ToInt32(Console.ReadLine());
+                        int avaliacaoId = _verificacao.VerificarNumero(Console.ReadLine());
                         Console.WriteLine(_avaliacaoUI.GetAvaliacaoById(avaliacaoId));
                         AperteEnter();
                         break;
                     case "3":
                         Console.Clear();
                         Console.Write("Digite o Id do avaliacao que quer atualizar: ");
-                        Avaliacao avaliacao = _avaliacaoUI.GetAvaliacaoById(Convert.ToInt32(Console.ReadLine()));
+                        Avaliacao avaliacao = _avaliacaoUI.GetAvaliacaoById(_verificacao.VerificarNumero(Console.ReadLine()));
                         _avaliacaoUI.UpdateAvaliacao(avaliacao);
                         AperteEnter();
                         break;
                     case "4":
                         Console.Clear();
                         Console.Write("Digite o Id do avaliacao que quer excluir: ");
-                        int id = Convert.ToInt32(Console.ReadLine());
+                        int id = _verificacao.VerificarNumero(Console.ReadLine());
                         _avaliacaoUI.DeleteAvaliacao(id);
                         AperteEnter();
                         break;

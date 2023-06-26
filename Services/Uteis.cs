@@ -42,6 +42,7 @@ namespace GerenciamentoPedidosComida.Services
 
         public List<Pedido> GetAllPedidosByStatus(string status)
         {
+            Console.Clear();
             return _dbContext.Pedidos.Where(p => p.Status == status).ToList();
         }
 
@@ -60,6 +61,29 @@ namespace GerenciamentoPedidosComida.Services
             _dbContext.SaveChanges();
         
         }
+
+        public void UpdateItemPedido(int pedidoId, int pratoId, int quantidade, decimal precoUnitario, decimal total)
+        {
+            var itemPedido = _dbContext.ItemPedidos.FirstOrDefault(p => p.PedidoId == pedidoId && p.PratoId == pratoId);
+            
+            itemPedido.Quantidade = quantidade;
+            itemPedido.PrecoUnitario = precoUnitario;
+            itemPedido.Total = total;
+
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteItemPedido(int pedidoId, int pratoId)
+        {
+            var itemPedido = _dbContext.ItemPedidos.FirstOrDefault(p => p.PedidoId == pedidoId && p.PratoId == pratoId);
+            
+            if (itemPedido != null)
+            {
+                _dbContext.ItemPedidos.Remove(itemPedido);
+                _dbContext.SaveChanges();
+            }
+        }
+
 
         
 

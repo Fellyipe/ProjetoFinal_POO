@@ -26,5 +26,17 @@ namespace GerenciamentoPedidosComida.Services
             return numero;
         }
 
+        public decimal VerificarDecimal(string entrada)
+        {
+            decimal numero;
+            while (!decimal.TryParse(entrada, out numero))
+            {
+                Console.WriteLine("Por favor, digite apenas números decimais");
+                entrada = Console.ReadLine();
+            }
+            return numero;
+        }
+
+
     }
 }

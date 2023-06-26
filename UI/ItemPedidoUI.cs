@@ -9,10 +9,13 @@ namespace GerenciamentoPedidosComida.UI
     {
         private IRepository<ItemPedido> _itemPedidoRepository;
         private Uteis _uteis;
+        private Verificacao _verificacao;
 
         public ItemPedidoUI()
         {
             _itemPedidoRepository = new Repository<ItemPedido>();
+            _uteis = new Uteis();
+            _verificacao = new Verificacao();
         }
 
         public void CreateItemPedido(ItemPedido itemPedido)
@@ -42,12 +45,12 @@ namespace GerenciamentoPedidosComida.UI
             _itemPedidoRepository.Update(itemPedido);
         }
 
-        public void DeleteItemPedido(int itemPedidoId)
+        public void DeleteItemPedido(int pedidoId, int pratoId)
         {
             // Lógica de negócio para exclusão de usuário
             // ...
 
-            _itemPedidoRepository.Delete(itemPedidoId);
+            _uteis.UpdateItemPedido(pedidoId, pratoId);
         }
 
         public void ListAllItemPedidos()
