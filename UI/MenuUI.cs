@@ -306,8 +306,6 @@ namespace GerenciamentoPedidosComida.UI
             Pedido pedido = _pedidoUI.GetPedidoById(pedidoId);
             pedido.Id = pedidoId;
             pedido.Total = totalPedido;
-            Console.WriteLine(pedido);
-            AperteEnter();
             _pedidoUI.UpdatePedido(pedido);
             Console.Clear();
             Console.WriteLine("Pedido realizado!");
