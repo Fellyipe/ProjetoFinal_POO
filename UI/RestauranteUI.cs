@@ -13,6 +13,7 @@ namespace GerenciamentoPedidosComida.UI
         public RestauranteUI()
         {
             _restauranteRepository = new Repository<Restaurante>();
+            _verificacao = new Verificacao();
         }
 
         public void CreateRestaurante()
@@ -21,15 +22,15 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Nome: ");
             string nome = Console.ReadLine();
-            nome = _verificacao.VeriicarNulidade(nome);
+            nome = _verificacao.VerificarNulidade(nome);
 
             Console.Write("Endereço: ");
             string endereco = Console.ReadLine();
-            endereco = _verificacao.VeriicarNulidade(endereco);
+            endereco = _verificacao.VerificarNulidade(endereco);
 
             Console.Write("Número de Telefone: ");
             string numeroTelefone = Console.ReadLine();
-            numeroTelefone = _verificacao.VeriicarNulidade(numeroTelefone);
+            numeroTelefone = _verificacao.VerificarNulidade(numeroTelefone);
 
             Restaurante restaurante = new Restaurante
             {
@@ -61,15 +62,15 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Nome: ");
             string nome = Console.ReadLine();
-            nome = _verificacao.VeriicarNulidade(nome);
+            nome = _verificacao.VerificarNulidade(nome);
 
             Console.Write("Endereço: ");
             string endereco = Console.ReadLine();
-            endereco = _verificacao.VeriicarNulidade(endereco);
+            endereco = _verificacao.VerificarNulidade(endereco);
 
             Console.Write("Número de Telefone: ");
             string numeroTelefone = Console.ReadLine();
-            numeroTelefone = _verificacao.VeriicarNulidade(numeroTelefone);
+            numeroTelefone = _verificacao.VerificarNulidade(numeroTelefone);
 
 
             restaurante.Nome = nome;

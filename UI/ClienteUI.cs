@@ -24,36 +24,36 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Nome: ");
             string nome = Console.ReadLine();
-            nome = _verificacao.VeriicarNulidade(nome);
+            nome = _verificacao.VerificarNulidade(nome);
 
             Console.Write("Endereço: ");
             string endereco = Console.ReadLine();
-            endereco = _verificacao.VeriicarNulidade(endereco);
+            endereco = _verificacao.VerificarNulidade(endereco);
 
             Console.Write("Email: ");
             string email = Console.ReadLine();
-            email = _verificacao.VeriicarNulidade(email);
+            email = _verificacao.VerificarNulidade(email);
 
             while(!ValidarEmail(email))
             {
                 Console.WriteLine("Email inválido, utilize o formato correto");
                 Console.Write("Email: ");
-                email = _verificacao.VeriicarNulidade(Console.ReadLine());
+                email = _verificacao.VerificarNulidade(Console.ReadLine());
             }
             while(IsEmailAlreadyTaken(email))
             {
                 Console.WriteLine("Email já utilizado, use outro");
                 Console.Write("Email: ");
-                email = _verificacao.VeriicarNulidade(Console.ReadLine());
+                email = _verificacao.VerificarNulidade(Console.ReadLine());
             }
 
             Console.Write("Senha: ");
             string senha = Console.ReadLine();
-            senha = _verificacao.VeriicarNulidade(senha);
+            senha = _verificacao.VerificarNulidade(senha);
 
             Console.Write("Número de Telefone: ");
             string numeroTelefone = Console.ReadLine();
-            numeroTelefone = _verificacao.VeriicarNulidade(numeroTelefone);
+            numeroTelefone = _verificacao.VerificarNulidade(numeroTelefone);
 
             Cliente cliente = new Cliente
             {
@@ -83,8 +83,46 @@ namespace GerenciamentoPedidosComida.UI
 
         public void UpdateCliente(Cliente cliente)
         {
-            // Lógica de negócio para atualização de usuário
-            // ...
+            Console.WriteLine("Informe os dados:");
+
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+            nome = _verificacao.VerificarNulidade(nome);
+
+            Console.Write("Endereço: ");
+            string endereco = Console.ReadLine();
+            endereco = _verificacao.VerificarNulidade(endereco);
+
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
+            email = _verificacao.VerificarNulidade(email);
+
+            while(!ValidarEmail(email))
+            {
+                Console.WriteLine("Email inválido, utilize o formato correto");
+                Console.Write("Email: ");
+                email = _verificacao.VerificarNulidade(Console.ReadLine());
+            }
+            while(IsEmailAlreadyTaken(email))
+            {
+                Console.WriteLine("Email já utilizado, use outro");
+                Console.Write("Email: ");
+                email = _verificacao.VerificarNulidade(Console.ReadLine());
+            }
+
+            Console.Write("Senha: ");
+            string senha = Console.ReadLine();
+            senha = _verificacao.VerificarNulidade(senha);
+
+            Console.Write("Número de Telefone: ");
+            string numeroTelefone = Console.ReadLine();
+            numeroTelefone = _verificacao.VerificarNulidade(numeroTelefone);
+
+            cliente.Nome = nome;
+            cliente.Endereco = endereco;
+            cliente.Email = email;
+            cliente.Senha = senha;
+            cliente.NumeroTelefone = numeroTelefone;
 
             _clienteRepository.Update(cliente);
         }

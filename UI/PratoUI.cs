@@ -13,6 +13,7 @@ namespace GerenciamentoPedidosComida.UI
         public PratoUI()
         {
             _pratoRepository = new Repository<Prato>();
+            _verificacao = new Verificacao();
         }
 
         public void CreatePrato()
@@ -21,14 +22,14 @@ namespace GerenciamentoPedidosComida.UI
 
             Console.Write("Nome do prato: ");
             string nomeItem = Console.ReadLine();
-            nomeItem = _verificacao.VeriicarNulidade(nomeItem);
+            nomeItem = _verificacao.VerificarNulidade(nomeItem);
 
             Console.Write("Descrição: ");
             string descricao = Console.ReadLine();
-            descricao = _verificacao.VeriicarNulidade(descricao);
+            descricao = _verificacao.VerificarNulidade(descricao);
 
             Console.Write("Preço: ");
-            decimal preco = Convert.ToDecimal(Console.ReadLine());
+            decimal preco = _verificacao.VerificarDecimal(Console.ReadLine());
 
             Console.Write("Id do restaurante: ");
             int restauranteId = _verificacao.VerificarNumero(Console.ReadLine());

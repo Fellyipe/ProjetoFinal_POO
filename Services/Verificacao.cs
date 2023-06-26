@@ -5,7 +5,7 @@ namespace GerenciamentoPedidosComida.Services
 {
     public class Verificacao
     {
-        public string VeriicarNulidade(string entrada)
+        public string VerificarNulidade(string entrada)
         {
             while(string.IsNullOrEmpty(entrada))
             {

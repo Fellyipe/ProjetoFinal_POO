@@ -55,8 +55,18 @@ namespace GerenciamentoPedidosComida.UI
 
         public void UpdateAvaliacao(Avaliacao avaliacao)
         {
-            // Lógica de negócio para atualização de usuário
-            // ...
+            Console.WriteLine("Avalie o seu pedido (1 a 5):");
+            int classificacao = _verificacao.VerificarNumero(Console.ReadLine());
+            while(classificacao < 1 || classificacao > 5)
+            {
+                Console.WriteLine("Por favor, escolha um número entre 1 a 5 para avaliar o pedido");
+                classificacao = _verificacao.VerificarNumero(Console.ReadLine());
+            }
+            Console.WriteLine("Faça um comentário (opcional)");
+            string comentario = Console.ReadLine(); 
+
+            avaliacao.Classificacao = classificacao;
+            avaliacao.Comentario = comentario;
 
             _avaliacaoRepository.Update(avaliacao);
         }

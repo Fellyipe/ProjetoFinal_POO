@@ -1,16 +1,19 @@
 using GerenciamentoPedidosComida.Interfaces;
 using GerenciamentoPedidosComida.Models;
 using GerenciamentoPedidosComida.Repositories;
+using GerenciamentoPedidosComida.Services;
 
 namespace GerenciamentoPedidosComida.UI
 {
     public class PedidoUI
     {
         private IRepository<Pedido> _pedidoRepository;
+        private Verificacao _verificacao;
 
         public PedidoUI()
         {
             _pedidoRepository = new Repository<Pedido>();
+            _verificacao = new Verificacao();
         }
 
         public void CreatePedido(int clienteId, int restauranteId)
@@ -47,10 +50,18 @@ namespace GerenciamentoPedidosComida.UI
             }
         }
 
-        public void UpdatePedido(Pedido pedido)
+        public void UpdatePedido(Pedido pedido, int verifica = 0)
         {
-            // Lógica de negócio para atualização de usuário
-            // ...
+            if(verifica == 1)
+            {
+                Console.WriteLine("Informe os dados");
+
+                Console.Write("Id do restaurante: ");
+                int restauranteId = _verificacao.VerificarNumero(Console.ReadLine());
+
+                Console.Write("Total: ");
+                decimal preco = _verificacao.VerificarDecimal(Console.ReadLine());
+            }
 
             _pedidoRepository.Update(pedido);
         }

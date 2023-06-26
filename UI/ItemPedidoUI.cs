@@ -10,12 +10,16 @@ namespace GerenciamentoPedidosComida.UI
         private IRepository<ItemPedido> _itemPedidoRepository;
         private Uteis _uteis;
         private Verificacao _verificacao;
+        private PratoUI _pratoUI;
+        private PedidoUI _pedidoUI;
 
         public ItemPedidoUI()
         {
             _itemPedidoRepository = new Repository<ItemPedido>();
             _uteis = new Uteis();
             _verificacao = new Verificacao();
+            _pedidoUI = new PedidoUI();
+            _pratoUI = new PratoUI();
         }
 
         public void CreateItemPedido(ItemPedido itemPedido)
@@ -39,18 +43,23 @@ namespace GerenciamentoPedidosComida.UI
 
         public void UpdateItemPedido(ItemPedido itemPedido)
         {
-            // Lógica de negócio para atualização de usuário
-            // ...
 
-            _itemPedidoRepository.Update(itemPedido);
+            Console.WriteLine("Informe os dados:");
+
+            Console.Write("Quantidade: ");
+            int quantidade = _verificacao.VerificarNumero(Console.ReadLine());
+
+            Pedido pedido = _pedidoUI.GetPedidoById(itemPedido.PedidoId);
+            Prato prato = _pratoUI.GetPratoById(itemPedido.PratoId);
+
+
+            _uteis.UpdateItemPedido(itemPedido.PedidoId, itemPedido.PratoId, quantidade, prato.Preco, (quantidade * prato.Preco));
+
         }
 
         public void DeleteItemPedido(int pedidoId, int pratoId)
         {
-            // Lógica de negócio para exclusão de usuário
-            // ...
-
-            _uteis.UpdateItemPedido(pedidoId, pratoId);
+            _uteis.DeleteItemPedido(pedidoId, pratoId);
         }
 
         public void ListAllItemPedidos()
